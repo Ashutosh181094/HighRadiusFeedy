@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.a1505197.highradiusfeedy.Register">
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="150dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIGNUP"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:textColor="@color/Black"/>
+
+    <EditText
+        android:id="@+id/et_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"/>
+    <EditText
+        android:id="@+id/et_user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"/>
+
+    <EditText
+        android:id="@+id/et_user_designation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Designation"/>
+    <EditText
+        android:id="@+id/et_user_password"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="password"/>
+    <EditText
+        android:id="@+id/et_user_confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="confirmpassword"/>
+ <Button
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text="REGISTER"
+     android:layout_marginTop="20dp"
+     android:id="@+id/btn_register"/>
+
+
+
+
+
+</LinearLayout>

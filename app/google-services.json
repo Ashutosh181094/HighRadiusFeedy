@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "944941140503",
+    "firebase_url": "https://highradiusfeedy.firebaseio.com",
+    "project_id": "highradiusfeedy",
+    "storage_bucket": "highradiusfeedy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944941140503:android:c325e3ebd271fadd",
+        "android_client_info": {
+          "package_name": "com.example.a1505197.highradiusfeedy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944941140503-j1jafnjbofkj60q2r5843ai86fbltmba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a1505197.highradiusfeedy",
+            "certificate_hash": "e6c8ac18e4cd75b552d7abafa0eecde354a091d7"
+          }
+        },
+        {
+          "client_id": "944941140503-21glucjeqjqagl23netbm942dp4p0fk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkbecUZEz4_kZTgqGdbhjVSZXZt_zhOQ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944941140503-21glucjeqjqagl23netbm942dp4p0fk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
