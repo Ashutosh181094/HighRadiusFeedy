@@ -18,13 +18,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/et_email"
         android:hint="Enter Email"
+        android:background="@drawable/rounded_corners"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="180dp"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_password"
         android:hint="Enter Password"
-        android:layout_marginTop="20dp"/>
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/rounded_corners"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
     <ProgressBar
         android:layout_width="50dp"
         android:layout_height="50dp"
