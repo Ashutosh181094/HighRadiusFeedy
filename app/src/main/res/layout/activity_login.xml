@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/et_email"
         android:hint="Enter Email"
-        android:background="@drawable/rounded_corners"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginLeft="10dp"
@@ -31,7 +30,6 @@
         android:hint="Enter Password"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@drawable/rounded_corners"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -46,7 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:background="@drawable/signupbutton"
         android:id="@+id/btn_login"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"

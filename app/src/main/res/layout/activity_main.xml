@@ -9,15 +9,17 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@android:color/transparent"
-        android:elevation="10dp">
+        app:elevation="0dp"
+        >
 
 
     <android.support.v7.widget.Toolbar
         android:layout_height="60dp"
         android:layout_width="match_parent"
         android:background="@color/blue1"
+        app:elevation="0dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,6 +35,22 @@
 
     </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainActivity_ViewPager">
+        <android.support.v4.view.PagerTabStrip
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/title"
+            android:background="@color/blue1"
+
+            >
+
+        </android.support.v4.view.PagerTabStrip>
+
+    </android.support.v4.view.ViewPager>
 
 
 </LinearLayout>
