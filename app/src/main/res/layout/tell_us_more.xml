@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:paddingHorizontal="20dp"
+        android:background="@color/White">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tell_us_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tell us more"
+            android:textSize="20sp"
+            android:fontFamily="@font/roboto_light"/>
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:id="@+id/et_feedback_text"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tell_us_more"
+            android:background="@drawable/edit_text_box"
+            />
+        <Switch
+            android:id="@+id/simpleSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Go anonymous"
+            android:switchPadding="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/et_feedback_text"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/White"
+            android:text="Submit feedback"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>
