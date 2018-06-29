@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="100dp"
+    android:padding="2dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/view_feedback_image_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/user"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_feedback_name_tv"
+            android:text="Name"
+            android:layout_toEndOf="@+id/view_feedback_image_view"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_feedback_department_tv"
+            android:layout_below="@id/view_feedback_name_tv"
+            android:text="Department"
+            android:layout_toEndOf="@+id/view_feedback_image_view"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/DarkGrey"
+            android:textSize="10sp"
+
+            />
+        <RelativeLayout
+            android:id="@+id/relative_layout_wrapper_for_smileys"
+            android:layout_toEndOf="@id/view_feedback_department_tv"
+            android:layout_below="@id/view_feedback_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/llOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/happy_smiley"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/happy"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numberHappy"
+                android:text="234"
+                android:layout_below="@id/happy_smiley"
+                />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llTwo"
+                android:layout_toEndOf="@+id/llOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <ImageView
+                    android:id="@+id/neutral_smiley"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/neutral"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberNeutral"
+                    android:layout_below="@id/happy_smiley"
+                    android:text="234"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llThree"
+                android:layout_toEndOf="@+id/llTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:id="@+id/sad_smiley"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/sad"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberSad"
+                    android:text="234"
+                    android:layout_below="@id/happy_smiley"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/right_navigation_viewer_card">
+
+    </ImageView>
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>
