@@ -19,10 +19,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".EmployeeInfo"></activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+        <activity android:name=".EditEmployeeDetails"/>
     </application>
 
 </manifest>
