@@ -47,6 +47,7 @@
                         android:layout_height="60dp"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/manager"
+                        android:id="@+id/manager"
                         />
                     <TextView
                         android:layout_width="wrap_content"

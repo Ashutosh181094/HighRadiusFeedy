@@ -4,30 +4,24 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/koleeg_icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Login">
-
-        </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Register" />
-        <activity android:name=".EmployeeInfo" />
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
-        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Register" />
+        <activity android:name=".EmployeeInfo" />
+        <activity android:name=".EditEmployeeDetails" />
+        <activity android:name=".Employess" />
+        <activity android:name=".FeedbackActivity"></activity>
     </application>
 
 </manifest>

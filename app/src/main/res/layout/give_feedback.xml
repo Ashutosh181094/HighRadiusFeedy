@@ -3,9 +3,9 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
+
+
 
 
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@color/White"
-
+            android:id="@+id/card_desination"
             android:text="Designation" />
 
     </LinearLayout>
@@ -122,24 +122,13 @@
         </RelativeLayout>
 <!---->
     </android.support.v7.widget.CardView>
-    <Button
-        android:id="@+id/btn_later"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/reviewing_card"
-        android:layout_marginTop="20dp"
-        android:text="SKIP"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:textColor="@color/White"
-        android:background="@color/red1"
-        android:paddingVertical="20dp"/>
+
 
     <Button
         android:id="@+id/btn_view_your_reviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_later"
+        android:layout_below="@id/reviewing_card"
         android:layout_marginTop="20dp"
         android:text="View your reviews"
         android:layout_marginRight="15dp"
@@ -148,5 +137,6 @@
         android:background="@color/colorPrimary"
         android:paddingVertical="20dp"/>
 
-    </ScrollView>
+
+
 </RelativeLayout>
