@@ -4,58 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     tools:context="com.example.a1505197.highradiusfeedy.Register">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:background="@color/colorPrimary"
+            android:id="@+id/top_bar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="Sign Up"
+                android:textColor="@color/White"
+                android:textSize="40dp"
+                tools:fontFamily="@font/roboto_light" />
+
+        </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:paddingHorizontal="20dp"
+        android:layout_below="@+id/top_bar">
     <ProgressBar
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/progressBar"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="150dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SIGNUP"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:textSize="40dp"
-        android:textColor="@color/Black"/>
+        android:layout_gravity="center_horizontal"
+        />
+
 
     <EditText
         android:id="@+id/et_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:backgroundTint="@color/grey1"
         android:hint="Name"/>
     <EditText
         android:id="@+id/et_user_email"
         android:layout_width="match_parent"
+        android:layout_marginVertical="10dp"
         android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@color/grey1"
         android:hint="Email"/>
 
     <EditText
         android:id="@+id/et_user_designation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:backgroundTint="@color/grey1"
         android:hint="Designation"/>
     <EditText
         android:id="@+id/et_user_password"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:inputType="textPassword"
+        android:backgroundTint="@color/grey1"
     android:hint="password"/>
     <EditText
         android:id="@+id/et_user_confirm_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:inputType="textPassword"
+        android:backgroundTint="@color/grey1"
         android:hint="confirmpassword"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
  <Button
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:text="REGISTER"
      android:layout_marginTop="20dp"
-     android:id="@+id/btn_register"/>
+     android:background="#66BB6A"
+     android:textColor="@color/White"
+     android:id="@+id/btn_register"
+     />
 
-
-
+    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>
