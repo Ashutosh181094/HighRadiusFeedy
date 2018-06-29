@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/login_background"
     tools:context="com.example.a1505197.highradiusfeedy.Login">
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="10dp"
     >
 
     <EditText
@@ -20,8 +22,10 @@
         android:hint="Enter Email"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:textColor="@color/White"
+        android:textColorHint="@color/grey2"
+        android:backgroundTint="@color/grey1"
+
         android:layout_marginTop="180dp"/>
     <EditText
         android:layout_width="match_parent"
@@ -31,38 +35,69 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:textColor="@color/White"
+        android:textColorHint="@color/grey2"
+        android:backgroundTint="@color/grey1"
+/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Forgot password?"
+        android:textColor="@color/red1"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="20dp"
+
+        />
+    </RelativeLayout>
+
     <ProgressBar
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/progressBar"
         android:layout_centerInParent="true"
         android:layout_marginLeft="150dp"
+        android:layout_marginTop="10dp"
         />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/btn_login"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REGISTER"
-        android:layout_gravity="center"
-        android:id="@+id/btn_register"/>
-    <TextView
-        android:id="@+id/tvForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot password?"
-        android:textColor="@color/red1"
-        android:layout_gravity="center"
-        />
+
+
 </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:id="@+id/btn_login"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="#0091EA"
+            android:textColor="@color/White"
+            android:paddingHorizontal="60dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not a member yet? Signup"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/yellow1"
+            android:layout_gravity="center"
+
+            android:id="@+id/btn_register"/>
+
+    </LinearLayout>
 
 
 </RelativeLayout>
