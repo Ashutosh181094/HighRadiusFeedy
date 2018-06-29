@@ -60,13 +60,15 @@
         android:backgroundTint="@color/grey1"
         android:hint="Email"/>
 
-    <EditText
+    <Spinner
         android:id="@+id/et_user_designation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:backgroundTint="@color/grey1"
         android:hint="Designation"/>
+
+
     <EditText
         android:id="@+id/et_user_password"
         android:layout_width="match_parent"
@@ -97,6 +99,7 @@
      android:background="#66BB6A"
      android:textColor="@color/White"
      android:id="@+id/btn_register"
+
      />
 
     </LinearLayout>

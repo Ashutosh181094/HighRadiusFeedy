@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Koleeg</string>
+
+    <string-array name="designation">
+        <item>Choose your designation</item>
+        <item>Level 1 Manager</item>
+        <item>Level 2 manager</item>
+        <item>Not a manager, yet</item>
+    </string-array>
+
 </resources>
