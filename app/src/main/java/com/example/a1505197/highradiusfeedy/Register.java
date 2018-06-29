@@ -16,17 +16,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-
+ int indexoffirst;
+ String key;
     EditText etName, etEmail, etPassword, etConfirmPassword, etDesignation;
     ImageView ivCamera;
     Button Register;
     private static final int REQUEST_CODE = 1;
     ProgressBar progressBar;
-    String name,email,password,confirmpassword;
+    String name,email,password,confirmpassword,designation;
+    DatabaseReference userdata;
 
 
 
@@ -41,7 +45,7 @@ public class Register extends AppCompatActivity {
         etEmail = findViewById(R.id.et_user_email);
         etPassword = findViewById(R.id.et_user_password);
         etConfirmPassword = findViewById(R.id.et_user_confirm_password);
-        etDesignation = findViewById(R.id.et_user_confirm_password);
+        etDesignation = findViewById(R.id.et_user_designation);
         initProgressBar();
         createNewUser();
 
@@ -54,9 +58,14 @@ public class Register extends AppCompatActivity {
             {
                 name=etName.getText().toString();
                 email=etEmail.getText().toString();
+                indexoffirst=email.indexOf('@');
+                key=email.substring(0,indexoffirst);
+                designation=etDesignation.getText().toString();
                 sendMessage.message=name;
                 password=etPassword.getText().toString();
                 confirmpassword=etConfirmPassword.getText().toString();
+
+
                 showProgressBar();
                 if (isStringNull(name)||isStringNull(email)||isStringNull(password)||isStringNull(confirmpassword))
                 {
@@ -82,6 +91,9 @@ public class Register extends AppCompatActivity {
                             showProgressBar();
                             if (task.isSuccessful())
                             {
+                                userdata= FirebaseDatabase.getInstance().getReference("userinfo");
+                                Userinfo userinfo=new Userinfo(name,"https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8",designation);
+                                userdata.child(""+key).setValue(userinfo);
                                 hideProgressBar();
                                 sendVerificationEmail();
                                 FirebaseAuth.getInstance().signOut();
