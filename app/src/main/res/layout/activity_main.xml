@@ -18,12 +18,17 @@
     <android.support.v7.widget.Toolbar
         android:layout_height="60dp"
         android:layout_width="match_parent"
-        android:background="#8BC34A"
+        android:background="#9CCC65"
         app:elevation="0dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:src="@drawable/koleeg_white"
+                android:layout_centerHorizontal="true"/>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImage"
                 android:layout_width="45dp"
@@ -46,9 +51,9 @@
         android:id="@+id/mainActivity_ViewPager">
         <android.support.v4.view.PagerTabStrip
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:id="@+id/title"
-            android:background="#8BC34A"
+            android:background="#9CCC65"
             app:tabSelectedTextColor="@color/White"
             app:tabTextColor="@color/grey2"
 
