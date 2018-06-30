@@ -3,6 +3,7 @@ package com.example.a1505197.highradiusfeedy;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +16,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -35,10 +40,16 @@ public class EditEmployeeDetails extends AppCompatActivity
     ImageView back;
     ImageView save;
     ImageView camera;
+    ImageView iv_user;
+    ImageView iv_designation;
+    DatabaseReference user;
     private static final int REQUEST_CODE=1;
     StorageReference storeUserPhoto;
     CircleImageView profilePhoto;
     TextView name,designation,email,phonenumber;
+    int indexoffirst;
+    String key;
+    String useremail;
 
 
     @Override
@@ -49,10 +60,15 @@ public class EditEmployeeDetails extends AppCompatActivity
         save=findViewById(R.id.saveChanges);
         camera=findViewById(R.id.iv_camera);
         name=findViewById(R.id.username);
+        iv_user=findViewById(R.id.iv_user);
+        iv_designation=findViewById(R.id.iv_designation);
         designation=findViewById(R.id.designation);
         email=findViewById(R.id.email);
         UserSessiondata userSessiondata=new UserSessiondata();
         name.setText(userSessiondata.getName());
+        useremail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        indexoffirst=useremail.indexOf('@');
+        key=useremail.substring(0,indexoffirst);
         email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         designation.setText(userSessiondata.getDesignation());
 
@@ -118,6 +134,48 @@ public class EditEmployeeDetails extends AppCompatActivity
                     }
                 });
                 builder.show();
+            }
+        });
+        iv_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog=new Dialog(EditEmployeeDetails.this);
+                dialog.setContentView(R.layout.edit_name);
+                dialog.show();
+                Button upload=dialog.findViewById(R.id.btn_edit_name);
+                upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText usernameedit=dialog.findViewById(R.id.et_name);
+                        String susernameedit=usernameedit.getText().toString();
+
+                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+
+                        user.child("name").setValue((Object)susernameedit);
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        iv_designation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog=new Dialog(EditEmployeeDetails.this);
+                dialog.setContentView(R.layout.edit_designation);
+                dialog.show();
+                Button upload=dialog.findViewById(R.id.btn_edit_name);
+                upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText designation=dialog.findViewById(R.id.et_designation);
+                        String sdesignation=designation.getText().toString();
+
+                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+
+                        user.child("designation").setValue((Object)sdesignation);
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 

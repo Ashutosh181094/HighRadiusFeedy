@@ -49,6 +49,7 @@
                 android:id="@+id/relLayout1">
 
                 <ImageView
+                    android:id="@+id/iv_user"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
@@ -83,6 +84,7 @@
                 android:layout_marginTop="15dp">
 
                 <ImageView
+                    android:id="@+id/iv_designation"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
