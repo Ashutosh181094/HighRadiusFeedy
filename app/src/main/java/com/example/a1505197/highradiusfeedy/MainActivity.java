@@ -10,11 +10,29 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
     CircleImageView userImage;
     ViewPager viewPager=null;
+    int indexoffirst;
+    DatabaseReference userdata;
+    private ArrayList<EmployessCards> al;
+
+
+    //String designation;
+    String key;
+    String email;
 
 
     @Override
@@ -22,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        al = new ArrayList<EmployessCards>();
+        email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        indexoffirst=email.indexOf('@');
+        key=email.substring(0,indexoffirst);
         userImage=findViewById(R.id.userImage);
         viewPager=findViewById(R.id.mainActivity_ViewPager);
         viewPager.setAdapter(new Mypager(getSupportFragmentManager()));
@@ -34,6 +56,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        userdata = FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+        userdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value[]=new String[5];
+                int i=0;
+                if (dataSnapshot.exists())
+                {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
+                    {
+                        value[i]=(String)dataSnapshot1.getValue();
+                        i++;
+
+
+                    }
+                }
+                Picasso.with(MainActivity.this)
+                        .load(value[3])
+                        .fit()
+                        .centerCrop()
+                        .into(userImage);
+                UserSessiondata sessiondata=new UserSessiondata();
+                sessiondata.setDepartment(value[0]);
+                sessiondata.setDesignation(value[1]);
+                sessiondata.setImage_url(value[3]);
+                sessiondata.setName(value[4]);
+
+
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 
@@ -41,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
 class Mypager extends FragmentPagerAdapter
 {
 
-    public Mypager(FragmentManager fm) {
+    public Mypager(FragmentManager fm)
+    {
         super(fm);
     }
 

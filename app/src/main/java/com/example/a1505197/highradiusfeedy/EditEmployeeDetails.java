@@ -16,12 +16,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
@@ -35,6 +38,7 @@ public class EditEmployeeDetails extends AppCompatActivity
     private static final int REQUEST_CODE=1;
     StorageReference storeUserPhoto;
     CircleImageView profilePhoto;
+    TextView name,designation,email,phonenumber;
 
 
     @Override
@@ -44,7 +48,21 @@ public class EditEmployeeDetails extends AppCompatActivity
         back=findViewById(R.id.backArrow);
         save=findViewById(R.id.saveChanges);
         camera=findViewById(R.id.iv_camera);
+        name=findViewById(R.id.username);
+        designation=findViewById(R.id.designation);
+        email=findViewById(R.id.email);
+        UserSessiondata userSessiondata=new UserSessiondata();
+        name.setText(userSessiondata.getName());
+        email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        designation.setText(userSessiondata.getDesignation());
+
         profilePhoto=findViewById(R.id.profile_photo);
+        Picasso.with(getApplicationContext())
+                .load(userSessiondata.getImage_url())
+                .fit()
+                .centerCrop()
+                .into(profilePhoto);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,3 +203,4 @@ public class EditEmployeeDetails extends AppCompatActivity
 
 
 }
+//

@@ -1,8 +1,14 @@
 package com.example.a1505197.highradiusfeedy;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,9 +27,12 @@ public class Employess extends AppCompatActivity {
     private EmployessCardAdapter arrayAdapter;
     private int i;
     DatabaseReference userdata;
+    DatabaseReference feedback,feedbackgiven;
     FirebaseAuth mAuth;
-    int indexoffirst;
-    String key;
+    int indexoffirst,indexofsecond;
+    String key,key2;
+    int checked;
+    Object dataObjectleftswipe;
 
     SwipeFlingAdapterView flingContainer;
 
@@ -71,14 +80,141 @@ public class Employess extends AppCompatActivity {
             }
 
             @Override
-            public void onLeftCardExit(Object dataObject) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
+            public void onLeftCardExit(Object dataObject)
+            {
+                dataObjectleftswipe=dataObject;
+                final Dialog dialog=new Dialog(Employess.this);
+                dialog.setContentView(R.layout.tell_us_more);
+                dialog.show();
+                final EditText feedbacktext=dialog.findViewById(R.id.et_feedback_text);
+                Switch switchanonymous=dialog.findViewById(R.id.simpleSwitch);
+                Button buttonsubmitfeedback=dialog.findViewById(R.id.submit_feedback);
+                switchanonymous.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+                    {
+                        if(buttonView.isChecked())
+                        {
+                            checked=1;
+                        }
+                        else
+                        {
+                            checked=0;
+                        }
+
+                    }
+                });
+                buttonsubmitfeedback.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(checked==1)
+                        {
+                            EmployessCards employee=(EmployessCards)dataObjectleftswipe;
+                            String email=employee.getEmail();
+                            indexoffirst=email.indexOf('@');
+                            key=email.substring(0,indexoffirst);
+                            String emailcurrentuser=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            indexofsecond=emailcurrentuser.indexOf('@');
+                            key2=emailcurrentuser.substring(0,indexofsecond);
+
+                            feedback=FirebaseDatabase.getInstance().getReference("feedback").child(""+key).child(""+key2);
+                            Feedbacks feedbacks=new Feedbacks(feedbacktext.getText().toString(),"änonymous","https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8","30/6/2018","Positive");
+                            feedback.setValue(feedbacks);
+
+                            feedbackgiven=FirebaseDatabase.getInstance().getReference("feedbackgiven");
+                            Feedbacks feedbacksgiven=new Feedbacks(feedbacktext.getText().toString(),UserSessiondata.getName(),UserSessiondata.getImage_url(),"30/6/2018","Positive");
+                            feedbackgiven.push().setValue(feedbacksgiven);
+                            dialog.dismiss();
+                        }
+                        else
+                        {
+                            EmployessCards employee=(EmployessCards)dataObjectleftswipe;
+                            String email=employee.getEmail();
+                            indexoffirst=email.indexOf('@');
+                            key=email.substring(0,indexoffirst);
+                            String emailcurrentuser=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            indexofsecond=emailcurrentuser.indexOf('@');
+                            key2=emailcurrentuser.substring(0,indexofsecond);
+                            feedback=FirebaseDatabase.getInstance().getReference("feedback").child(""+key).child(""+key2);
+                            Feedbacks feedbacks=new Feedbacks(feedbacktext.getText().toString(),UserSessiondata.getName(),UserSessiondata.getImage_url(),"30/6/2018","Positive");
+                            feedback.setValue(feedbacks);
+
+                            feedbackgiven=FirebaseDatabase.getInstance().getReference("feedbackgiven");
+                            feedbackgiven.push().setValue(feedbacks);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
             }
 
             @Override
-            public void onRightCardExit(Object dataObject) {
+            public void onRightCardExit(final Object dataObject)
+            {
+                final Dialog dialog=new Dialog(Employess.this);
+                dialog.setContentView(R.layout.tell_us_more);
+                dialog.show();
+                final EditText feedbacktext=dialog.findViewById(R.id.et_feedback_text);
+                Switch switchanonymous=dialog.findViewById(R.id.simpleSwitch);
+                Button buttonsubmitfeedback=dialog.findViewById(R.id.submit_feedback);
+                switchanonymous.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+                    {
+                      if(buttonView.isChecked())
+                      {
+                          checked=1;
+                      }
+                      else
+                      {
+                          checked=0;
+                      }
+
+                    }
+                });
+                buttonsubmitfeedback.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(checked==1)
+                        {
+                            EmployessCards employee=(EmployessCards)dataObject;
+                            String email=employee.getEmail();
+                            indexoffirst=email.indexOf('@');
+                            key=email.substring(0,indexoffirst);
+                            String emailcurrentuser=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            indexofsecond=emailcurrentuser.indexOf('@');
+                            key2=emailcurrentuser.substring(0,indexofsecond);
+
+                            feedback=FirebaseDatabase.getInstance().getReference("feedback").child(""+key).child(""+key2);
+                            Feedbacks feedbacks=new Feedbacks(feedbacktext.getText().toString(),"änonymous","https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8","30/6/2018","Negative");
+                            feedback.setValue(feedbacks);
+
+                            feedbackgiven=FirebaseDatabase.getInstance().getReference("feedbackgiven");
+                            Feedbacks feedbacksgiven=new Feedbacks(feedbacktext.getText().toString(),UserSessiondata.getName(),UserSessiondata.getImage_url(),"30/6/2018","Negative");
+                            feedbackgiven.push().setValue(feedbacksgiven);
+                            dialog.dismiss();
+                        }
+                        else
+                        {
+                            EmployessCards employee=(EmployessCards)dataObject;
+                            String email=employee.getEmail();
+                            indexoffirst=email.indexOf('@');
+                            key=email.substring(0,indexoffirst);
+                            String emailcurrentuser=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            indexofsecond=emailcurrentuser.indexOf('@');
+                            key2=emailcurrentuser.substring(0,indexofsecond);
+                            feedback=FirebaseDatabase.getInstance().getReference("feedback").child(""+key).child(""+key2);
+                            Feedbacks feedbacks=new Feedbacks(feedbacktext.getText().toString(),UserSessiondata.getName(),UserSessiondata.getImage_url(),"30/6/2018","Negative");
+                            feedback.setValue(feedbacks);
+
+                            feedbackgiven=FirebaseDatabase.getInstance().getReference("feedbackgiven");
+                            feedbackgiven.push().setValue(feedbacks);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+
             }
 
             @Override
@@ -106,7 +242,8 @@ public class Employess extends AppCompatActivity {
 
 
 
-    public void right() {
+    public void right()
+    {
         /**
          * Trigger the right event manually.
          */
@@ -124,3 +261,4 @@ public class Employess extends AppCompatActivity {
 
 
 }
+//

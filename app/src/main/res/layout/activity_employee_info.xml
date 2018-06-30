@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/blue1"
+        android:background="#8BC34A"
         android:minHeight="?attr/actionBarSize"
         >
         <RelativeLayout
@@ -23,15 +23,16 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/edit_user_profile"
-                android:src="@drawable/ic_edit"/>
+                android:src="@drawable/ic_edit_white"/>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userInfoImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/userinfoimage"/>
+                android:background="@drawable/user_account_ic"/>
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NAME"

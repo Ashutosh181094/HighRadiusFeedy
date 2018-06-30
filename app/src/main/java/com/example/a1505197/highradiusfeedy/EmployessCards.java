@@ -8,15 +8,17 @@ public class EmployessCards
 {
     String department;
     String designation;
+    String email;
     String image_url;
     String name;
 
     public EmployessCards() {
     }
 
-    public EmployessCards(String department, String designation, String image_url, String name) {
+    public EmployessCards(String department, String designation, String email, String image_url, String name) {
         this.department = department;
         this.designation = designation;
+        this.email = email;
         this.image_url = image_url;
         this.name = name;
     }
@@ -37,6 +39,14 @@ public class EmployessCards
         this.designation = designation;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getImage_url() {
         return image_url;
     }
@@ -53,3 +63,4 @@ public class EmployessCards
         this.name = name;
     }
 }
+//

@@ -125,17 +125,18 @@
 
 
     <Button
-        android:id="@+id/btn_view_your_reviews"
+        android:id="@+id/skip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/reviewing_card"
         android:layout_marginTop="20dp"
-        android:text="View your reviews"
+        android:text="Skip"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:textColor="@color/White"
         android:background="@color/colorPrimary"
         android:paddingVertical="20dp"/>
+
 
 
 

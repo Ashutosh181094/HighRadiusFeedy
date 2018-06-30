@@ -18,7 +18,8 @@ class Pager extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public Fragment getItem(int position)
+    {
 
         switch (position) {
             case 0:

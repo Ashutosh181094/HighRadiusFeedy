@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             >
 
-                <android.support.v4.widget.CircleImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_marginTop="10dp"
                     android:id="@+id/profileimage"
                     android:layout_width="35dp"
@@ -30,6 +30,7 @@
                     android:layout_marginTop="5dp"
                     android:textSize="20dp"/>
                 <TextView
+                    android:id="@+id/date_given"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/user_name"
@@ -47,10 +48,13 @@
 
             </View>
             <TextView
+                android:id="@+id/description_given"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view"
                 android:text="Description"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"/>
 
