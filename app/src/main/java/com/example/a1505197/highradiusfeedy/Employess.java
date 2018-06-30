@@ -1,6 +1,7 @@
 package com.example.a1505197.highradiusfeedy;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +35,7 @@ public class Employess extends AppCompatActivity {
     String key,key2;
     int checked;
     Object dataObjectleftswipe;
+    public ProgressDialog progressDialog;
 
     SwipeFlingAdapterView flingContainer;
 
@@ -47,6 +50,9 @@ public class Employess extends AppCompatActivity {
         String email = user.getEmail();
         indexoffirst = email.indexOf('@');
         key = email.substring(0, indexoffirst);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
 
         al = new ArrayList<EmployessCards>();
         userdata = FirebaseDatabase.getInstance().getReference("userinfo");
@@ -58,6 +64,7 @@ public class Employess extends AppCompatActivity {
                         EmployessCards userinfo = dataSnapshot1.getValue(EmployessCards.class);
                         al.add(userinfo);
                     }
+                    progressDialog.dismiss();
                 }
 
                 arrayAdapter = new EmployessCardAdapter(Employess.this, R.layout.give_feedback, al);
@@ -88,7 +95,7 @@ public class Employess extends AppCompatActivity {
                 dialog.show();
                 final EditText feedbacktext=dialog.findViewById(R.id.et_feedback_text);
                 Switch switchanonymous=dialog.findViewById(R.id.simpleSwitch);
-                Button buttonsubmitfeedback=dialog.findViewById(R.id.submit_feedback);
+                TextView buttonsubmitfeedback=dialog.findViewById(R.id.submit_feedback);
                 switchanonymous.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
@@ -156,7 +163,7 @@ public class Employess extends AppCompatActivity {
                 dialog.show();
                 final EditText feedbacktext=dialog.findViewById(R.id.et_feedback_text);
                 Switch switchanonymous=dialog.findViewById(R.id.simpleSwitch);
-                Button buttonsubmitfeedback=dialog.findViewById(R.id.submit_feedback);
+                TextView buttonsubmitfeedback=dialog.findViewById(R.id.submit_feedback);
                 switchanonymous.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)

@@ -84,6 +84,7 @@ public class SplashScreen extends AppCompatActivity {
 
         // Setting Dialog Message
         alertDialog.setMessage(message);
+        alertDialog.setCancelable(false);
 
         // Setting alert dialog icon
         // alertDialog.setIcon((status) ? R.mipmap.ic_launcher : R.mipmap.ic_launcher);
