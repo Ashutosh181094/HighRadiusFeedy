@@ -163,7 +163,7 @@ public class EditEmployeeDetails extends AppCompatActivity
                 final Dialog dialog=new Dialog(EditEmployeeDetails.this);
                 dialog.setContentView(R.layout.edit_designation);
                 dialog.show();
-                Button upload=dialog.findViewById(R.id.btn_edit_name);
+                Button upload=dialog.findViewById(R.id.btn_edit_designation);
                 upload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

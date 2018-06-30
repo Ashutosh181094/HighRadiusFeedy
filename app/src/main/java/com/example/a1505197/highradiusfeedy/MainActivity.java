@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     int indexoffirst;
     DatabaseReference userdata;
     private ArrayList<EmployessCards> al;
+    String designation;
 
 
     //String designation;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        userdata = FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+        userdata = FirebaseDatabase.getInstance().getReference("registeredEmployees").child(""+key);
         userdata.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

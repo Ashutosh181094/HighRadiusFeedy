@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,12 +22,13 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
 {
     Context context;
     List<EmployessCards> data;
+
     public EmployessCardAdapter(@NonNull Context context, int resource, @NonNull List<EmployessCards> objects) {
         super(context, resource, objects);
         this.context=context;
         this.data=objects;
     }
-    public View getView(int positions,View convertView,ViewGroup parent)
+    public View getView(final int positions, View convertView, ViewGroup parent)
     {
         EmployessCards cards=getItem(positions);
         if(convertView==null)
@@ -38,7 +40,7 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
         ImageView employeeImage=convertView.findViewById(R.id.review_card_image);
         TextView  employeecardname=convertView.findViewById(R.id.review_card_name);
         TextView employeecarddepartment=convertView.findViewById(R.id.review_card_department);
-        ///set the different values recieved from firebase
+        Button skip=convertView.findViewById(R.id.skip);
         employeecarddepartment.setText(cards.getDepartment());
         employeedesignation.setText(cards.getDesignation());
         Picasso.with(context)

@@ -9,7 +9,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 /**
  * Created by 1505197 on 6/29/2018.
@@ -17,18 +16,63 @@ import android.widget.ImageView;
 
 public class FragmentSubmit extends Fragment
 {
-    ImageView managericon;
-    CardView cardView_manager;
+    CardView cardView_manager,cardView_hr,cardView_admin,cardView_food,cardView_security,cardView_etc;
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_submit,container,false);
-        managericon=view.findViewById(R.id.manager);
         cardView_manager=view.findViewById(R.id.card_manager);
-        managericon.setOnClickListener(new View.OnClickListener() {
+        cardView_admin=view.findViewById(R.id.card_admin);
+        cardView_etc=view.findViewById(R.id.card_etc);
+        cardView_security=view.findViewById(R.id.card_security);
+        cardView_food=view.findViewById(R.id.card_food);
+        cardView_hr=view.findViewById(R.id.card_hr);
+        cardView_manager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),Employess.class);
+                intent.putExtra("tag","manager");
+                startActivity(intent);
+            }
+        });
+        cardView_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(getContext(),Employess.class);
+                intent.putExtra("tag","admin");
+                startActivity(intent);
+            }
+        });
+        cardView_hr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),Employess.class);
+                intent.putExtra("tag","hr");
+                startActivity(intent);
+            }
+        });
+        cardView_food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),Employess.class);
+                intent.putExtra("tag","food");
+                startActivity(intent);
+            }
+        });
+        cardView_security.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),Employess.class);
+                intent.putExtra("tag","security");
+                startActivity(intent);
+            }
+        });
+        cardView_etc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),Employess.class);
+                intent.putExtra("tag","etc");
                 startActivity(intent);
             }
         });
