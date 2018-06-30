@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by 1505197 on 6/29/2018.
@@ -22,11 +23,14 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
 {
     Context context;
     List<EmployessCards> data;
+    private ArrayList<EmployessCards> arrayList;
 
     public EmployessCardAdapter(@NonNull Context context, int resource, @NonNull List<EmployessCards> objects) {
         super(context, resource, objects);
         this.context=context;
         this.data=objects;
+        arrayList=new ArrayList<>();
+        this.arrayList.addAll(data);
     }
     public View getView(final int positions, View convertView, ViewGroup parent)
     {
@@ -40,7 +44,6 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
         ImageView employeeImage=convertView.findViewById(R.id.review_card_image);
         TextView  employeecardname=convertView.findViewById(R.id.review_card_name);
         TextView employeecarddepartment=convertView.findViewById(R.id.review_card_department);
-        Button skip=convertView.findViewById(R.id.skip);
         employeecarddepartment.setText(cards.getDepartment());
         employeedesignation.setText(cards.getDesignation());
         Picasso.with(context)
@@ -53,6 +56,24 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
 
         return convertView;
     }
+    public void filter(String characterText)
+    {
+        characterText=characterText.toLowerCase(Locale.getDefault());
+        data.clear();
+        if(characterText.length()==0) {
+            data.addAll(arrayList);
+        }else
+        {
+            data.clear();
+            for(EmployessCards employessCards:arrayList)
+            {
+                if(employessCards.getName().toLowerCase(Locale.getDefault()).contains(characterText))
+                    data.add(employessCards);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 
 }
 //

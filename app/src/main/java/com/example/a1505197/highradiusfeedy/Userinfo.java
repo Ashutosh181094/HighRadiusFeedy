@@ -41,5 +41,4 @@ public class Userinfo
 
     public void setDesignation(String designation) {
         this.designation = designation;
-    }
-}
+    }}

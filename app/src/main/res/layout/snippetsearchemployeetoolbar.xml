@@ -25,7 +25,7 @@
                 android:background="@null"
                 android:textColor="@color/Black"
                 android:textSize="20sp"
-                android:id="@+id/etSearchContacts"
+                android:id="@+id/etSearchEmployees"
                 android:layout_toRightOf="@+id/ivBackArrow"/>
             <!-- android:background="@null" This is added to remove the black line under the edit text-->
 
