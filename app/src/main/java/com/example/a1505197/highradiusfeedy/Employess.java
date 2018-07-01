@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -88,9 +89,15 @@ public class Employess extends AppCompatActivity {
         skip=findViewById(R.id.skip);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                right();
-                skiptonext=true;
+            public void onClick(View v)
+            {
+                if (al.size()!=0) {
+                    right();
+                    skiptonext = true;
+                }
+                else {
+                    Toast.makeText(Employess.this, "No More Employees", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -150,9 +157,14 @@ public class Employess extends AppCompatActivity {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!");
 
-
-                al.add(al.remove(0));
-                arrayAdapter.notifyDataSetChanged();
+               if(!al.isEmpty()) {
+                   al.add(al.remove(0));
+                   arrayAdapter.notifyDataSetChanged();
+               }
+               else if(al.size()==0)
+               {
+                   Toast.makeText(Employess.this, "No Employee Available", Toast.LENGTH_SHORT).show();
+               }
             }
 
             @Override

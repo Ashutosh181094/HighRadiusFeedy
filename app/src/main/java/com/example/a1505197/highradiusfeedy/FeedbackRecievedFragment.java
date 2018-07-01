@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -65,7 +64,6 @@ public class FeedbackRecievedFragment extends Fragment
                     {
                         Feedbacks feedbacks=dataSnapshot1.getValue(Feedbacks.class);
                         String timestamp=getTimeStampDifference(feedbacks.getDate());
-                        Toast.makeText(getActivity(), ""+feedbacks.getDate(), Toast.LENGTH_SHORT).show();
                         if(timestamp.equals("0"))
                         {
                             feedbacks.date=timestamp+"DAYS AGO";

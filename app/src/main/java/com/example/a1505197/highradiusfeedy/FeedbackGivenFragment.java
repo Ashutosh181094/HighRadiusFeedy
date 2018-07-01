@@ -20,8 +20,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by 1505197 on 6/29/2018.
@@ -54,7 +59,17 @@ public class FeedbackGivenFragment extends Fragment
                     for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                     {
                         Feedbacks feedbacks=dataSnapshot1.getValue(Feedbacks.class);
+                        String timestamp=getTimeStampDifference(feedbacks.getDate());
                         feedbackGiven.add(feedbacks);
+                        if(timestamp.equals("0"))
+                        {
+                            feedbacks.date="TODAY";
+
+                        }
+                        else
+                        {
+                            feedbacks.date=timestamp+"DAYS AGO";
+                        }
                     }
                 }
 
@@ -88,5 +103,24 @@ public class FeedbackGivenFragment extends Fragment
         });
 
         return view;
+    }
+    public String getTimeStampDifference(String timeStampfeedback)
+    {
+        String difference="";
+        Calendar calendar=Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("ISO"));
+        Date today= calendar.getTime();
+        simpleDateFormat.format(today);
+        Date timestamp;
+        try
+        {
+            timestamp=simpleDateFormat.parse(timeStampfeedback);
+            difference=String.valueOf(Math.round(((today.getTime()-timestamp.getTime())/1000/60/60/24)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            difference="";
+        }
+        return difference;
     }
 }

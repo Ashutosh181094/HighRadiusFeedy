@@ -21,7 +21,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
     CircleImageView userImage;
     ViewPager viewPager=null;
     int indexoffirst;
+
     DatabaseReference userdata;
     private ArrayList<EmployessCards> al;
     String designation;
     DatabaseReference feedbackRecieved;
+    int i=0;
 
 
     //String designation;
@@ -64,48 +65,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        userdata = FirebaseDatabase.getInstance().getReference("registeredEmployees").child(""+key);
-        userdata.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value[]=new String[5];
-                int i=0;
-                if (dataSnapshot.exists())
-                {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
-                    {
-                        value[i]=(String)dataSnapshot1.getValue();
-                        i++;
-
-
-                    }
-                }
-                Picasso.with(MainActivity.this)
-                        .load(value[3])
-                        .fit()
-                        .centerCrop()
-                        .into(userImage);
-                UserSessiondata sessiondata=new UserSessiondata();
-                sessiondata.setDepartment(value[0]);
-                sessiondata.setDesignation(value[1]);
-                sessiondata.setImage_url(value[3]);
-                sessiondata.setName(value[4]);
-
-
-
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        feedbackRecieved=FirebaseDatabase.getInstance().getReference("feedback").child(""+key);
+        UserSessiondata sessiondata=new UserSessiondata();
+        Picasso.with(MainActivity.this)
+                .load(sessiondata.getImage_url())
+                .fit()
+                .centerCrop()
+                .into(userImage);
+        feedbackRecieved= FirebaseDatabase.getInstance().getReference("feedback").child(""+key);
         feedbackRecieved.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s)
             {
-              sendNotification();
+                i++;
+
+                if(i==2)
+                {
+                    sendNotification();
+                }
+
 
             }
 
@@ -123,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -132,7 +108,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
+
+
+
     public void sendNotification()
     {
 
