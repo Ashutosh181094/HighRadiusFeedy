@@ -34,6 +34,8 @@
         <activity android:name=".Employess" />
         <activity android:name=".FeedbackActivity"></activity>
         <activity android:name=".UploadUserImage"></activity>
+
     </application>
+
 
 </manifest>

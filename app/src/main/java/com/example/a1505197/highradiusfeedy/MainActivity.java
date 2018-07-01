@@ -1,16 +1,22 @@
 package com.example.a1505197.highradiusfeedy;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference userdata;
     private ArrayList<EmployessCards> al;
     String designation;
+    DatabaseReference feedbackRecieved;
 
 
     //String designation;
@@ -93,7 +100,62 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        feedbackRecieved=FirebaseDatabase.getInstance().getReference("feedback").child(""+key);
+        feedbackRecieved.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s)
+            {
+              sendNotification();
 
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+    }
+    public void sendNotification()
+    {
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this);
+
+        //Create the intent that’ll fire when the user taps the notification//
+
+        Intent intent = new Intent(MainActivity.this,EmployeeInfo.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        mBuilder.setContentIntent(pendingIntent);
+
+        mBuilder.setSmallIcon(R.drawable.koleeg_green);
+        mBuilder.setContentTitle("New Feedback");
+        mBuilder.setContentText("A new Feedback given to you");
+        mBuilder.setColor(Color.GREEN);
+
+        NotificationManager mNotificationManager =
+
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(001, mBuilder.build());
     }
 
 
