@@ -29,6 +29,14 @@
                 android:layout_height="120dp"
                 android:src="@drawable/koleeg_white"
                 android:layout_centerHorizontal="true"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_button"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_directions_run_white_24dp"
+                android:layout_centerVertical="true"
+                />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImage"
                 android:layout_width="45dp"

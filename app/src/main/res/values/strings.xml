@@ -3,9 +3,17 @@
 
     <string-array name="designation">
         <item>Choose your designation</item>
-        <item>Level 1 Manager</item>
-        <item>Level 2 manager</item>
-        <item>Not a manager, yet</item>
+        <item>Senior Manager</item>
+        <item>Manager</item>
+        <item>Employee</item>
+    </string-array>
+    <string-array name="department">
+        <item>Choose your department</item>
+        <item>HR</item>
+        <item>Admin</item>
+        <item>Finance</item>
+        <item>Food</item>
+        <item>Security</item>
     </string-array>
 
 </resources>

@@ -139,10 +139,11 @@ public class Employess extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         EmployessCards userinfo = dataSnapshot1.getValue(EmployessCards.class);
-                        if (userinfo.level==levelemp||userinfo.level==levelemp-1)
-                        {
+                        if(levelemp-1>0) {
+                            if (userinfo.level == levelemp || userinfo.level == levelemp - 1) {
 
-                            al.add(userinfo);
+                                al.add(userinfo);
+                            }
                         }
                     }
                     progressDialog.dismiss();

@@ -15,6 +15,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager=null;
     int indexoffirst;
 
+
     DatabaseReference userdata;
     private ArrayList<RegisteredEmployeesData> al;
     String designation;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     int i=0;
     int j=0;
 
-
+    ImageView logoutImage;
     //String designation;
     String key;
     String email;
@@ -58,9 +60,29 @@ public class MainActivity extends AppCompatActivity {
         key=email.substring(0,indexoffirst);
         userImage=findViewById(R.id.userImage);
         viewPager=findViewById(R.id.mainActivity_ViewPager);
+
+
+
         final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Please wait while we fetch your data");
         progressDialog.show();
+
+
+        logoutImage=findViewById(R.id.logout_button);
+        logoutImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+
+            }
+        });
+
+
+
+
+
+
         userdata = FirebaseDatabase.getInstance().getReference("registeredemployees");
         userdata.addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,6 +124,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError)
             {
+
+            }
+        });
+
+
+        userdata = FirebaseDatabase.getInstance().getReference("registeredEmployees").child(""+key);
+        userdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value[]=new String[5];
+                int i=0;
+                if (dataSnapshot.exists())
+                {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
+                    {
+                        value[i]=(String)dataSnapshot1.getValue();
+                        i++;
+
+                    }
+
+                }
+
+
+                UserSessiondata sessiondata=new UserSessiondata();
+                sessiondata.setDepartment(value[0]);
+                sessiondata.setDesignation(value[1]);
+                sessiondata.setImage_url(value[3]);
+                sessiondata.setName(value[4]);
+
+
+
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
@@ -263,14 +321,14 @@ class Mypager extends FragmentPagerAdapter
         else
         if(position==3)
 
+            if(department.equals("HR"))
+            {
+                return "HR";
+            }
+            else
             if(department.equals("Finance"))
             {
                 return "Finance";
-            }
-            else
-            if(department.equals("Hr"))
-            {
-                return "HR";
             }
             else
             if(department.equals("Admin"))

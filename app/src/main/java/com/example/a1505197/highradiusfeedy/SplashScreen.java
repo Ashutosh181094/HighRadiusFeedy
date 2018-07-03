@@ -36,10 +36,10 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        al = new ArrayList<EmployessCards>();
-        email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        indexoffirst=email.indexOf('@');
-        key=email.substring(0,indexoffirst);
+//        al = new ArrayList<EmployessCards>();
+//        //email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+//        indexoffirst=email.indexOf('@');
+//        key=email.substring(0,indexoffirst);
 
 
         if(isWorkingInternetPersent()){

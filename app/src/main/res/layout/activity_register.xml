@@ -60,6 +60,15 @@
         android:backgroundTint="@color/grey1"
         android:hint="Email"/>
 
+        <Spinner
+            android:id="@+id/et_user_department"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:backgroundTint="@color/grey1"
+            android:hint="Designation"/>
+
+
     <Spinner
         android:id="@+id/et_user_designation"
         android:layout_width="match_parent"

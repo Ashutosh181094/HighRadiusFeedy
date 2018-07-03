@@ -22,19 +22,37 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     FirebaseAuth mAuth;
- int indexoffirst;
+    private DatabaseReference mDatabase;
+
+
+    int indexoffirst;
  //String designation;
  String key;
-    EditText etName, etEmail, etPassword, etConfirmPassword; Spinner spinner;
+    Long level;
+    String url="https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/newUser.png?alt=media&token=ee48d582-d5d7-4840-a086-2bd8876e8817";
+    EditText etName, etEmail, etPassword, etConfirmPassword; Spinner spinner,spinnerDepartment;
     ImageView ivCamera;
     Button Register;
     private static final int REQUEST_CODE = 1;
     ProgressBar progressBar;
-    String name,email,password,confirmpassword,designation;
+    String name,email,password,confirmpassword,designation,department;
     DatabaseReference userdata;
+    Long Userlevel;
+
+    HashMap<String,Integer> hashMap=new HashMap<String, Integer>(){{
+
+        put("Senior Manager",1);
+        put("Manager",2);
+        put("Employee",3);
+    }};
+
+
+
 
 
 
@@ -49,6 +67,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         etEmail = findViewById(R.id.et_user_email);
         etPassword = findViewById(R.id.et_user_password);
         etConfirmPassword = findViewById(R.id.et_user_confirm_password);
+
         spinner=findViewById(R.id.et_user_designation);
         spinner.setSelection(0);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.designation, android.R.layout.simple_spinner_item);
@@ -56,6 +75,25 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        spinnerDepartment=findViewById(R.id.et_user_department);
+        spinnerDepartment.setSelection(0);
+        ArrayAdapter<CharSequence> adapterDepartment=ArrayAdapter.createFromResource(this,R.array.department,android.R.layout.simple_spinner_item);
+        spinnerDepartment.setAdapter(adapterDepartment);
+        spinnerDepartment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                department=parent.getItemAtPosition(position).toString();
+                dispay(department);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         //Toast.makeText(getApplicationContext(),designation,Toast.LENGTH_LONG).show();
         //etDesignation = findViewById(R.id.et_user_designation);
         initProgressBar();
@@ -72,6 +110,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                 email=etEmail.getText().toString();
                 indexoffirst=email.indexOf('@');
                 key=email.substring(0,indexoffirst);
+
 
                // designation.setSelection(0);
                 sendMessage.message=name;
@@ -113,6 +152,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                                 redirectLoginScreen();
                                 Toast.makeText(Register.this,"Verification link has been sent to registered Email",Toast.LENGTH_LONG).show();
                                 hideProgressBar();
+                                registerUser();
 
                             }
                             else
@@ -123,6 +163,36 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
                             }
 
+                        }
+
+                        private void registerUser() {
+
+
+
+                            mDatabase = FirebaseDatabase.getInstance().getReference("registeredemployees");
+
+                            Userlevel=findLevel(designation);
+                            EmployessCards newUser=new EmployessCards(department,designation,email,url,Userlevel,name,0L,0L);
+
+
+                            mDatabase.child(""+key).setValue(newUser);
+
+
+
+                        }
+
+                        private long findLevel(String designation) {
+                            if(designation.equals("Senior Manager")){
+                                level=1L;
+                            }
+                            if(designation.equals("Manager")){
+                                level=2L;
+
+                            }
+                            if(designation.equals("Employee")){
+                                level=3L;
+                            }
+                            return level;
                         }
                     });
                 }
@@ -194,6 +264,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         designation=parent.getItemAtPosition(position).toString();
         dispay(designation);
+
 
 
     }
