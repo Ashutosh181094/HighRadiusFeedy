@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager=findViewById(R.id.mainActivity_ViewPager);
 
 
-
+//
         final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Please wait while we fetch your data");
         progressDialog.show();
