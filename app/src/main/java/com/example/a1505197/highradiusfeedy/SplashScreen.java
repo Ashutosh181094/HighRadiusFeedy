@@ -40,40 +40,6 @@ public class SplashScreen extends AppCompatActivity {
         email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         indexoffirst=email.indexOf('@');
         key=email.substring(0,indexoffirst);
-        userdata = FirebaseDatabase.getInstance().getReference("registeredEmployees").child(""+key);
-        userdata.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value[]=new String[5];
-                int i=0;
-                if (dataSnapshot.exists())
-                {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
-                    {
-                        value[i]=(String)dataSnapshot1.getValue();
-                        i++;
-
-                    }
-
-                }
-
-
-                UserSessiondata sessiondata=new UserSessiondata();
-                sessiondata.setDepartment(value[0]);
-                sessiondata.setDesignation(value[1]);
-                sessiondata.setImage_url(value[3]);
-                sessiondata.setName(value[4]);
-
-
-
-
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
         if(isWorkingInternetPersent()){
@@ -101,6 +67,8 @@ public class SplashScreen extends AppCompatActivity {
 //
 //        },SPLASH_TIME_OUT);
     }
+
+
 
 
     public void splash() {

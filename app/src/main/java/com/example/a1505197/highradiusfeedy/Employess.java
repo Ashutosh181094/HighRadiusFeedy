@@ -39,6 +39,7 @@ public class Employess extends AppCompatActivity {
     DatabaseReference feedback,feedbackgiven;
     FirebaseAuth mAuth;
     int indexoffirst,indexofsecond;
+    Long levelemp;
     String key,key2;
     int checked;
     Object dataObjectleftswipe;
@@ -62,7 +63,9 @@ public class Employess extends AppCompatActivity {
         flingContainer = findViewById(R.id.frame);
         viewEmployeeBar=findViewById(R.id.viewEmployeeToolbar);
         searchBar=findViewById(R.id.search_toolbar);
-        Intent intent=getIntent();
+        UserSessiondata userSessiondata=new UserSessiondata();
+        levelemp=userSessiondata.getLevel();
+        final Intent intent=getIntent();
         String key3=intent.getStringExtra("tag");
         ivBackArrow=findViewById(R.id.ivBackArrow);
         searchEmployess=findViewById(R.id.etSearchEmployees);
@@ -128,7 +131,7 @@ public class Employess extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        al = new ArrayList<EmployessCards>();
+        al = new ArrayList<>();
         userdata = FirebaseDatabase.getInstance().getReference("userinfo").child(""+key3);
         userdata.addValueEventListener(new ValueEventListener() {
             @Override
@@ -136,7 +139,11 @@ public class Employess extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         EmployessCards userinfo = dataSnapshot1.getValue(EmployessCards.class);
-                        al.add(userinfo);
+                        if (userinfo.level==levelemp||userinfo.level==levelemp-1)
+                        {
+
+                            al.add(userinfo);
+                        }
                     }
                     progressDialog.dismiss();
                 }

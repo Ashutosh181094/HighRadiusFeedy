@@ -11,6 +11,7 @@ public class UserSessiondata
     static String email;
     static  String image_url;
     static  String name;
+    static long level;
 
     public static String getDepartment() {
         return department;
@@ -50,5 +51,13 @@ public class UserSessiondata
 
     public static void setName(String name) {
         UserSessiondata.name = name;
+    }
+
+    public static long getLevel() {
+        return level;
+    }
+
+    public static void setLevel(long level) {
+        UserSessiondata.level = level;
     }
 }

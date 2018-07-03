@@ -83,12 +83,14 @@ public class FeedbackRecievedFragment extends Fragment
                         }
                     }
                 }
+                if (getActivity()!=null) {
 
-                 feedBackRecievedAdapter=new FeedBackRecievedAdapter(getActivity(),feedbackRecieved);
-                recyclerView.setAdapter(feedBackRecievedAdapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                feedBackRecievedAdapter.notifyDataSetChanged();
+                    feedBackRecievedAdapter = new FeedBackRecievedAdapter(getActivity(), feedbackRecieved);
+                    recyclerView.setAdapter(feedBackRecievedAdapter);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    feedBackRecievedAdapter.notifyDataSetChanged();
+                }
                 List<PieEntry> p=new ArrayList<>();
 
                 p.add(new PieEntry(positive,"Positive"));

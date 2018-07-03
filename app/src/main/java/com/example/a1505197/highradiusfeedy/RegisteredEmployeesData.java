@@ -1,31 +1,28 @@
 package com.example.a1505197.highradiusfeedy;
 
 /**
- * Created by 1505197 on 6/29/2018.
+ * Created by 1505197 on 7/3/2018.
  */
 
-public class EmployessCards {
+public class RegisteredEmployeesData
+{
     String department;
     String designation;
     String email;
     String image_url;
     Long level;
     String name;
-    Long positive;
-    Long negative;
 
-    public EmployessCards() {
+    public RegisteredEmployeesData() {
     }
 
-    public EmployessCards(String department, String designation, String email, String image_url, Long level, String name, Long positive, Long negative) {
+    public RegisteredEmployeesData(String department, String designation, String email, String image_url, Long level, String name) {
         this.department = department;
         this.designation = designation;
         this.email = email;
         this.image_url = image_url;
         this.level = level;
         this.name = name;
-        this.positive = positive;
-        this.negative = negative;
     }
 
     public String getDepartment() {
@@ -74,21 +71,5 @@ public class EmployessCards {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getPositive() {
-        return positive;
-    }
-
-    public void setPositive(Long positive) {
-        this.positive = positive;
-    }
-
-    public Long getNegative() {
-        return negative;
-    }
-
-    public void setNegative(Long negative) {
-        this.negative = negative;
     }
 }

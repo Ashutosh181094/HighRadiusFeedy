@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * Created by 1505197 on 6/29/2018.
@@ -23,7 +24,27 @@ public class FragmentSubmit extends Fragment
         View view=inflater.inflate(R.layout.fragment_submit,container,false);
         cardView_manager=view.findViewById(R.id.card_manager);
         cardView_admin=view.findViewById(R.id.card_admin);
-        cardView_etc=view.findViewById(R.id.card_etc);
+        cardView_hr=view.findViewById(R.id.card_hr);
+       // cardView_etc=view.findViewById(R.id.card_etc);
+        UserSessiondata userSessiondata=new UserSessiondata();
+        String department=userSessiondata.getDepartment();
+        Toast.makeText(getActivity(), ""+department, Toast.LENGTH_SHORT).show();
+        if(department.equals("Finance"))
+        {
+            cardView_hr.setVisibility(View.INVISIBLE);
+            cardView_admin.setVisibility(View.INVISIBLE);
+        }
+        else
+            if (department.equals("Admin"))
+            {
+                cardView_manager.setVisibility(View.INVISIBLE);
+                cardView_hr.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                cardView_manager.setVisibility(View.INVISIBLE);
+                cardView_admin.setVisibility(View.INVISIBLE);
+            }
         cardView_security=view.findViewById(R.id.card_security);
         cardView_food=view.findViewById(R.id.card_food);
         cardView_hr=view.findViewById(R.id.card_hr);
@@ -31,7 +52,7 @@ public class FragmentSubmit extends Fragment
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),Employess.class);
-                intent.putExtra("tag","manager");
+                intent.putExtra("tag","finance");
                 startActivity(intent);
             }
         });
@@ -68,14 +89,14 @@ public class FragmentSubmit extends Fragment
                 startActivity(intent);
             }
         });
-        cardView_etc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getContext(),Employess.class);
-                intent.putExtra("tag","etc");
-                startActivity(intent);
-            }
-        });
+//        cardView_etc.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(getContext(),Employess.class);
+//                intent.putExtra("tag","etc");
+//                startActivity(intent);
+//            }
+//        });
         return view;
     }
 }

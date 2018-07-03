@@ -2,6 +2,7 @@ package com.example.a1505197.highradiusfeedy;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -33,10 +35,11 @@ public class MainActivity extends AppCompatActivity {
     int indexoffirst;
 
     DatabaseReference userdata;
-    private ArrayList<EmployessCards> al;
+    private ArrayList<RegisteredEmployeesData> al;
     String designation;
     DatabaseReference feedbackRecieved;
     int i=0;
+    int j=0;
 
 
     //String designation;
@@ -49,13 +52,60 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        al = new ArrayList<EmployessCards>();
+        al = new ArrayList<>();
         email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         indexoffirst=email.indexOf('@');
         key=email.substring(0,indexoffirst);
         userImage=findViewById(R.id.userImage);
         viewPager=findViewById(R.id.mainActivity_ViewPager);
-        viewPager.setAdapter(new Mypager(getSupportFragmentManager()));
+        final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Please wait while we fetch your data");
+        progressDialog.show();
+        userdata = FirebaseDatabase.getInstance().getReference("registeredemployees");
+        userdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                int i=0;
+                if (dataSnapshot.exists())
+                {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
+                    {
+                       RegisteredEmployeesData registeredEmployeesData=dataSnapshot1.getValue(RegisteredEmployeesData.class);
+                      if(registeredEmployeesData.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+                      {
+                          al.add(registeredEmployeesData);
+                      }
+                    }
+
+                }
+
+                UserSessiondata sessiondata=new UserSessiondata();
+                sessiondata.setDepartment(al.get(0).department);
+                sessiondata.setDesignation(al.get(0).designation);
+                sessiondata.setImage_url(al.get(0).image_url);
+                sessiondata.setLevel(al.get(0).level);
+                sessiondata.setName(al.get(0).name);
+                Picasso.with(MainActivity.this)
+                        .load(al.get(0).getImage_url())
+                        .fit()
+                        .centerCrop()
+                        .into(userImage);
+              progressDialog.dismiss();
+
+              viewPager.setAdapter(new Mypager(getSupportFragmentManager()));
+
+
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+            }
+        });
+
 
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,23 +115,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        UserSessiondata sessiondata=new UserSessiondata();
-        Picasso.with(MainActivity.this)
-                .load(sessiondata.getImage_url())
-                .fit()
-                .centerCrop()
-                .into(userImage);
+
         feedbackRecieved= FirebaseDatabase.getInstance().getReference("feedback").child(""+key);
         feedbackRecieved.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s)
             {
-                i++;
+               j++;
+               if(j==2)
+               {
 
-                if(i==2)
-                {
-                    sendNotification();
-                }
+
+                   sendNotification();
+               }
+
 
 
             }
@@ -139,10 +186,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
 }
 class Mypager extends FragmentPagerAdapter
 {
-
+    UserSessiondata userSessiondata;
+    String department;
+    private static final String TAG = "Mypager";
     public Mypager(FragmentManager fm)
     {
         super(fm);
@@ -151,67 +201,88 @@ class Mypager extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int position) {
        Fragment fragment=null;
+        userSessiondata=new UserSessiondata();
+       department=userSessiondata.getDepartment();
        if(position==0)
        {
            fragment=new FragmentSubmit();
        }
        else
-           if(position==1)
-           {
-               fragment=new FragmentHR();
-           }
-           else
-               if(position==2)
+               if(position==1)
                {
                 fragment=new FragmentFood();
                }
                else
-                   if(position==3)
+                   if(position==2)
                    {
-                       fragment=new FragmentAdmin();
+                       fragment=new FragmentSecurity();
                    }
                    else
-                       if(position==4)
-                       {
-                           fragment=new FragmentSecurity();
-                       }
-                       else
-                           if(position==5)
-                           {
-                              fragment=new FragmentEtc();
-                           }
+        if(position==3)
+        {
+            if(department.equals("Finance"))
+            {
+                fragment=new FragmentFinance();
+            }
+            else
+            if(department.equals("Hr"))
+            {
+                fragment=new FragmentHR();
+            }
+            else
+            if(department.equals("Admin"))
+            {
+                fragment=new FragmentAdmin();
+            }
+
+        }
+
                            return fragment;
     }
 
     @Override
     public int getCount() {
-        return 6;
+        return 4;
     }
 
     @Nullable
     @Override
-    public CharSequence getPageTitle(int position) {
+    public CharSequence getPageTitle(int position)
+    {
+        userSessiondata=new UserSessiondata();
+        department=userSessiondata.getDepartment();
         if(position==0)
             return "SUBMIT";
+
             else
         if(position==1)
-            return "HR";
-            else
-        if(position==2)
             return "FOOD";
             else
-        if(position==3)
-            return "ADMIN";
-            else
-        if(position==4)
+        if(position==2)
             return "SECURITY";
+        else
+        if(position==3)
+
+            if(department.equals("Finance"))
+            {
+                return "Finance";
+            }
             else
-        if(position==5)
-            return "ETC";
+            if(department.equals("Hr"))
+            {
+                return "HR";
+            }
+            else
+            if(department.equals("Admin"))
+            {
+                return "ADMIN";
+            }
+
 
             return null;
 
 
 
     }
+
 }

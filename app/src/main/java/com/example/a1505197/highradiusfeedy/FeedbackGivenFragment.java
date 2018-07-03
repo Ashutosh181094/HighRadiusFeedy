@@ -72,12 +72,13 @@ public class FeedbackGivenFragment extends Fragment
                         }
                     }
                 }
-
-                feedBackGivenAdapter=new FeedBackGivenAdapter(getActivity(),feedbackGiven);
-                recyclerView.setAdapter(feedBackGivenAdapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                feedBackGivenAdapter.notifyDataSetChanged();
+if (getActivity()!=null) {
+    feedBackGivenAdapter = new FeedBackGivenAdapter(getActivity(), feedbackGiven);
+    recyclerView.setAdapter(feedBackGivenAdapter);
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    feedBackGivenAdapter.notifyDataSetChanged();
+}
                 List<PieEntry> p=new ArrayList<>();
                 TellFeedbackCount tellFeedbackCount=new TellFeedbackCount();
                 positive=tellFeedbackCount.getPositive();
