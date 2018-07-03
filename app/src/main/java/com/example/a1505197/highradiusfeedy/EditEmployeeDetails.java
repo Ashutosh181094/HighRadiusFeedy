@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,13 +21,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -50,6 +51,7 @@ public class EditEmployeeDetails extends AppCompatActivity
     int indexoffirst;
     String key;
     String useremail;
+    DatabaseReference registeredemployees;
 
 
     @Override
@@ -88,14 +90,8 @@ public class EditEmployeeDetails extends AppCompatActivity
 
             }
         });
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(EditEmployeeDetails.this,EmployeeInfo.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
+
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,6 +218,9 @@ public class EditEmployeeDetails extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        final ProgressDialog progressDialog=new ProgressDialog(EditEmployeeDetails.this);
+        progressDialog.setMessage("Please wait while we fetch your data");
+        progressDialog.show();
         if(requestCode==Init.CAMERA_REQUEST_CODE&&resultCode== Activity.RESULT_OK)
         {
             Bitmap bitmap=(Bitmap)data.getExtras().get("data");
@@ -232,7 +231,7 @@ public class EditEmployeeDetails extends AppCompatActivity
             Uri selectedImageUri=data.getData();
             profilePhoto.setImageURI(selectedImageUri);
         }
-        //storeUserPhoto= FirebaseStorage.getInstance().getReference(user.getEmail());
+        storeUserPhoto= FirebaseStorage.getInstance().getReference(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         profilePhoto.setDrawingCacheEnabled(true);
         profilePhoto.buildDrawingCache();
         Bitmap bitmap = profilePhoto.getDrawingCache();
@@ -250,11 +249,23 @@ public class EditEmployeeDetails extends AppCompatActivity
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                progressDialog.dismiss();
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                Toast.makeText(EditEmployeeDetails.this, "load"+taskSnapshot.getDownloadUrl().toString(), Toast.LENGTH_SHORT).show();
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                   registeredemployees= FirebaseDatabase.getInstance().getReference("registeredemployees");
+                   UserSessiondata userSessiondata=new UserSessiondata();
+                   userSessiondata.setImage_url(taskSnapshot.getDownloadUrl().toString());
 
-                //userData.child(user.getUid()).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
+                registeredemployees.child(key).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(EditEmployeeDetails.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
             }
         });
     }

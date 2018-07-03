@@ -9,7 +9,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 /**
  * Created by 1505197 on 6/29/2018.
@@ -28,7 +27,6 @@ public class FragmentSubmit extends Fragment
        // cardView_etc=view.findViewById(R.id.card_etc);
         UserSessiondata userSessiondata=new UserSessiondata();
         String department=userSessiondata.getDepartment();
-        Toast.makeText(getActivity(), ""+department, Toast.LENGTH_SHORT).show();
         if(department.equals("Finance"))
         {
             cardView_hr.setVisibility(View.INVISIBLE);

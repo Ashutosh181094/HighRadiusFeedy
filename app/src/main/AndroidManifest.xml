@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a1505197.highradiusfeedy">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -17,9 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
-
-        </activity>
+        <activity android:name=".Login"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -32,10 +31,8 @@
         <activity android:name=".EmployeeInfo" />
         <activity android:name=".EditEmployeeDetails" />
         <activity android:name=".Employess" />
-        <activity android:name=".FeedbackActivity"></activity>
-        <activity android:name=".UploadUserImage"></activity>
-
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".UploadUserImage" />
     </application>
-
 
 </manifest>

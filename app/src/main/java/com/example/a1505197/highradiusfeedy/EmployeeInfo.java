@@ -60,6 +60,7 @@ public class EmployeeInfo extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(EmployeeInfo.this,EditEmployeeDetails.class);
                 startActivity(intent);
+
                 finish();
             }
         });
@@ -68,5 +69,7 @@ public class EmployeeInfo extends AppCompatActivity {
 
 
     }
+
+
 }
 //
