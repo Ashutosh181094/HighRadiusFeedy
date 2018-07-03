@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Please wait while we fetch your data");
         progressDialog.show();
-
+//
 
         logoutImage=findViewById(R.id.logout_button);
         logoutImage.setOnClickListener(new View.OnClickListener() {
