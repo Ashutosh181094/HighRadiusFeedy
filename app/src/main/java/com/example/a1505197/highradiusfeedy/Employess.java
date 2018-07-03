@@ -146,7 +146,16 @@ public class Employess extends AppCompatActivity {
                             }
                         }
                     }
+                    if(al.size()==0){
+
                     progressDialog.dismiss();
+                        Toast.makeText(Employess.this, "It seems you are the boss ;)", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                    else {
+                        progressDialog.dismiss();
+                    }
                 }
 
                 arrayAdapter = new EmployessCardAdapter(Employess.this, R.layout.give_feedback, al);

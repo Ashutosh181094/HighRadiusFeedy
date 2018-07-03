@@ -59,7 +59,7 @@ public class FragmentSubmit extends Fragment
             public void onClick(View v)
             {
                 Intent intent=new Intent(getContext(),Employess.class);
-                intent.putExtra("tag","admin");
+                intent.putExtra("tag","Admin");
                 startActivity(intent);
             }
         });
@@ -67,7 +67,7 @@ public class FragmentSubmit extends Fragment
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),Employess.class);
-                intent.putExtra("tag","hr");
+                intent.putExtra("tag","Hr");
                 startActivity(intent);
             }
         });
@@ -75,7 +75,7 @@ public class FragmentSubmit extends Fragment
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),Employess.class);
-                intent.putExtra("tag","food");
+                intent.putExtra("tag","Food");
                 startActivity(intent);
             }
         });
@@ -83,7 +83,7 @@ public class FragmentSubmit extends Fragment
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),Employess.class);
-                intent.putExtra("tag","security");
+                intent.putExtra("tag","Security");
                 startActivity(intent);
             }
         });

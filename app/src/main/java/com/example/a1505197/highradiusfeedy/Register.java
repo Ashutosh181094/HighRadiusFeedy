@@ -28,6 +28,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
     FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private DatabaseReference mDatabaseuserinfo;
 
 
     int indexoffirst;
@@ -143,16 +144,14 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                             showProgressBar();
                             if (task.isSuccessful())
                             {
-                                userdata= FirebaseDatabase.getInstance().getReference("userinfo");
-                                Userinfo userinfo=new Userinfo(name,"https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8",designation);
-                                userdata.child(""+key).setValue(userinfo);
+                                registerUser();
                                 hideProgressBar();
                                 sendVerificationEmail();
                                 FirebaseAuth.getInstance().signOut();
                                 redirectLoginScreen();
                                 Toast.makeText(Register.this,"Verification link has been sent to registered Email",Toast.LENGTH_LONG).show();
                                 hideProgressBar();
-                                registerUser();
+
 
                             }
                             else
@@ -167,15 +166,16 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
                         private void registerUser() {
 
+                            Userlevel=findLevel(designation);
 
 
                             mDatabase = FirebaseDatabase.getInstance().getReference("registeredemployees");
+                            RegisteredEmployeesData registeredEmployeesData=new RegisteredEmployeesData(department,designation,email,url,Userlevel,name);
+                            mDatabase.child(""+key).setValue(registeredEmployeesData);
 
-                            Userlevel=findLevel(designation);
+                            mDatabaseuserinfo=FirebaseDatabase.getInstance().getReference("userinfo").child(department);
                             EmployessCards newUser=new EmployessCards(department,designation,email,url,Userlevel,name,0L,0L);
-
-
-                            mDatabase.child(""+key).setValue(newUser);
+                            mDatabaseuserinfo.child(key).setValue(newUser);
 
 
 

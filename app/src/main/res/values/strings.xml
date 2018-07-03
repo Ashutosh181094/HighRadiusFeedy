@@ -9,7 +9,7 @@
     </string-array>
     <string-array name="department">
         <item>Choose your department</item>
-        <item>HR</item>
+        <item>Hr</item>
         <item>Admin</item>
         <item>Finance</item>
         <item>Food</item>
