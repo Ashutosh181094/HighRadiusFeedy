@@ -80,7 +80,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
         spinnerDepartment=findViewById(R.id.et_user_department);
         spinnerDepartment.setSelection(0);
-        ArrayAdapter<CharSequence> adapterDepartment=ArrayAdapter.createFromResource(this,R.array.department,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterDepartment=ArrayAdapter.createFromResource(this,R.array.department,android.R.layout.simple_spinner_dropdown_item);
         spinnerDepartment.setAdapter(adapterDepartment);
         spinnerDepartment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

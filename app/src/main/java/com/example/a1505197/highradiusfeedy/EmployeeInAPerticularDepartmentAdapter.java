@@ -73,7 +73,7 @@ public class EmployeeInAPerticularDepartmentAdapter extends RecyclerView.Adapter
             name=itemView.findViewById(R.id.view_feedback_name_tv);
             department=itemView.findViewById(R.id.view_feedback_department_tv);
             happysmiley=itemView.findViewById(R.id.numberHappy);
-            neutralsmiley=itemView.findViewById(R.id.numberNeutral);
+            //neutralsmiley=itemView.findViewById(R.id.numberNeutral);
             sadsmiley=itemView.findViewById(R.id.numberSad);
             circleImageView=itemView.findViewById(R.id.view_feedback_image_view);
 
