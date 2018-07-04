@@ -16,10 +16,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,14 +34,13 @@ public class MainActivity extends AppCompatActivity {
     CircleImageView userImage;
     ViewPager viewPager=null;
     int indexoffirst;
-
+    FirebaseUser user;
+ FirebaseAuth mAuth;
 
     DatabaseReference userdata;
     private ArrayList<RegisteredEmployeesData> al;
-    String designation;
-    DatabaseReference feedbackRecieved;
-    int i=0;
-    int j=0;
+
+
 
     ImageView logoutImage;
     //String designation;
@@ -117,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                         .centerCrop()
                         .into(userImage);
               progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, ""+sessiondata.getDepartment(), Toast.LENGTH_SHORT).show();
 
               viewPager.setAdapter(new Mypager(getSupportFragmentManager()));
 
@@ -144,42 +141,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        feedbackRecieved= FirebaseDatabase.getInstance().getReference("feedback").child(""+key);
-        feedbackRecieved.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s)
-            {
-               j++;
-               if(j==2)
-               {
 
-
-                   sendNotification();
-               }
-
-
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
 
@@ -213,8 +175,19 @@ public class MainActivity extends AppCompatActivity {
         mNotificationManager.notify(001, mBuilder.build());
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null)
+        {
+            FirebaseAuth.getInstance().signOut();
+        }
+        else
+        {
 
-
+        }
+    }
 }
 class Mypager extends FragmentPagerAdapter
 {
@@ -312,5 +285,6 @@ class Mypager extends FragmentPagerAdapter
 
 
     }
+
 
 }

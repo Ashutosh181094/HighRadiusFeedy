@@ -26,6 +26,7 @@ import java.util.HashMap;
 
 public class Register extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
+    private static final String TAG = "Register";
     FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabaseuserinfo;
@@ -278,4 +279,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.a1505197.highradiusfeedy;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,37 +50,46 @@ public class FeedbackGivenFragment extends Fragment
         recyclerView=view.findViewById(R.id.userSideRecyclerView);
         feedbackGiven=new ArrayList<>();
         view2=view;
-
-        Feedbackgiven= FirebaseDatabase.getInstance().getReference("feedbackgiven");
+        final ProgressDialog progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please wait while we fetch your data");
+        progressDialog.show();
+       UserSessiondata userSessiondata=new UserSessiondata();
+        Feedbackgiven= FirebaseDatabase.getInstance().getReference("feedback").child(userSessiondata.getDepartment());
         Feedbackgiven.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 if(dataSnapshot.exists())
                 {
-                    for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
-                    {
-                        Feedbacks feedbacks=dataSnapshot1.getValue(Feedbacks.class);
-                        String timestamp=getTimeStampDifference(feedbacks.getDate());
-                        feedbackGiven.add(feedbacks);
-                        if(timestamp.equals("0"))
+                    for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()) {
+                        Feedbacks feedbacks = dataSnapshot1.getValue(Feedbacks.class);
+                        String timestamp = getTimeStampDifference(feedbacks.getDate());
+
+                        if (feedbacks.getGiven_by().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
                         {
-                            feedbacks.date="TODAY";
+                            feedbackGiven.add(feedbacks);
 
                         }
-                        else
-                        {
-                            feedbacks.date=timestamp+"DAYS AGO";
+                            if (timestamp.equals("0")) {
+                                feedbacks.date = "TODAY";
+
+                            } else {
+                                feedbacks.date = timestamp + "DAYS AGO";
+                            }
                         }
-                    }
+
+
+                    progressDialog.dismiss();
                 }
-if (getActivity()!=null) {
-    feedBackGivenAdapter = new FeedBackGivenAdapter(getActivity(), feedbackGiven);
-    recyclerView.setAdapter(feedBackGivenAdapter);
-    recyclerView.setHasFixedSize(true);
-    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-    feedBackGivenAdapter.notifyDataSetChanged();
-}
+
+                if (getActivity()!=null)
+                {
+                 feedBackGivenAdapter = new FeedBackGivenAdapter(getActivity(), feedbackGiven);
+                 recyclerView.setAdapter(feedBackGivenAdapter);
+                 recyclerView.setHasFixedSize(true);
+                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                 feedBackGivenAdapter.notifyDataSetChanged();
+                  }
                 List<PieEntry> p=new ArrayList<>();
                 TellFeedbackCount tellFeedbackCount=new TellFeedbackCount();
                 positive=tellFeedbackCount.getPositive();

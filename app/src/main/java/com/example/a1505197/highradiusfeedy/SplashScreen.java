@@ -9,12 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -37,7 +32,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 //        al = new ArrayList<EmployessCards>();
-//        //email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+//        email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
 //        indexoffirst=email.indexOf('@');
 //        key=email.substring(0,indexoffirst);
 

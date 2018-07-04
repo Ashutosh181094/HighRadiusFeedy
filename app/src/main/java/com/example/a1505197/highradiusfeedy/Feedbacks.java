@@ -11,17 +11,22 @@ public class Feedbacks
     String image_url;
     String date;
     String type;
+    String given_to;
+    String given_by;
+    Long level;
 
-    public Feedbacks()
-    {
+    public Feedbacks() {
     }
 
-    public Feedbacks(String feedback, String name, String image_url, String date, String type) {
+    public Feedbacks(String feedback, String name, String image_url, String date, String type, String given_to, String given_by, Long level) {
         this.feedback = feedback;
         this.name = name;
         this.image_url = image_url;
         this.date = date;
         this.type = type;
+        this.given_to = given_to;
+        this.given_by = given_by;
+        this.level = level;
     }
 
     public String getFeedback() {
@@ -62,5 +67,29 @@ public class Feedbacks
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getGiven_to() {
+        return given_to;
+    }
+
+    public void setGiven_to(String given_to) {
+        this.given_to = given_to;
+    }
+
+    public String getGiven_by() {
+        return given_by;
+    }
+
+    public void setGiven_by(String given_by) {
+        this.given_by = given_by;
+    }
+
+    public Long getLevel() {
+        return level;
+    }
+
+    public void setLevel(Long level) {
+        this.level = level;
     }
 }

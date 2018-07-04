@@ -53,7 +53,8 @@ public class FeedbackRecievedFragment extends Fragment
         String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         indexoffirst=email.indexOf('@');
         key=email.substring(0,indexoffirst);
-        Feedbackrecieved= FirebaseDatabase.getInstance().getReference("feedback").child(""+key);
+        UserSessiondata userSessiondata=new UserSessiondata();
+        Feedbackrecieved= FirebaseDatabase.getInstance().getReference("feedback").child(""+userSessiondata.getDepartment());
         Feedbackrecieved.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
@@ -63,23 +64,21 @@ public class FeedbackRecievedFragment extends Fragment
                     for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                     {
                         Feedbacks feedbacks=dataSnapshot1.getValue(Feedbacks.class);
-                        String timestamp=getTimeStampDifference(feedbacks.getDate());
-                        if(timestamp.equals("0"))
-                        {
-                            feedbacks.date=timestamp+"DAYS AGO";
-                        }
-                        else
-                        {
-                            feedbacks.date="TODAY";
-                        }
-                        feedbackRecieved.add(feedbacks);
-                        if(feedbacks.type.equals("Positive"))
-                        {
-                            positive++;
-                        }
-                        else
-                        {
-                         negative++;
+                        if(feedbacks.getGiven_to().equals(FirebaseAuth.getInstance().getCurrentUser())) {
+
+                            String timestamp = getTimeStampDifference(feedbacks.getDate());
+
+                            if (timestamp.equals("0")) {
+                                feedbacks.date = timestamp + "DAYS AGO";
+                            } else {
+                                feedbacks.date = "TODAY";
+                            }
+                            feedbackRecieved.add(feedbacks);
+                            if (feedbacks.type.equals("Positive")) {
+                                positive++;
+                            } else {
+                                negative++;
+                            }
                         }
                     }
                 }

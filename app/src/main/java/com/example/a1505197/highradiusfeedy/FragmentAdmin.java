@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,33 +27,42 @@ public class FragmentAdmin extends Fragment
     RecyclerView recyclerViewAdmin;
     DatabaseReference databaseReferenceAdmin;
     ArrayList<EmployessCards> al;
+    Long levelemp;
+    EmployeeInAPerticularDepartmentAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_admin,container,false);
         al=new ArrayList<>();
+        UserSessiondata userSessiondata=new UserSessiondata();
+        levelemp=userSessiondata.getLevel();
+
         recyclerViewAdmin=view.findViewById(R.id.userSideRecyclerView);
-        databaseReferenceAdmin= FirebaseDatabase.getInstance().getReference("userinfo").child("admin");
+        databaseReferenceAdmin= FirebaseDatabase.getInstance().getReference("userinfo").child("Admin");
         databaseReferenceAdmin.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+
                 if(dataSnapshot.exists())
                 {
                     for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                     {
                         EmployessCards employessCards=dataSnapshot1.getValue(EmployessCards.class);
-                        al.add(employessCards);
+                        if (employessCards.level==levelemp+1)
+                        {
+                            al.add(employessCards);
+                        }
 
                     }
                 }
                 if (getActivity()!=null)
                 {
-//                    adapter = new EmployeeInAPerticularDepartmentAdapter(getActivity(), al);
-//                    recyclerViewAdmin.setAdapter(adapter);
-//                    recyclerViewAdmin.setHasFixedSize(true);
-//                    recyclerViewAdmin.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                    adapter.notifyDataSetChanged();
+                    adapter=new EmployeeInAPerticularDepartmentAdapter(getActivity(),al);
+                    recyclerViewAdmin.setAdapter(adapter);
+                    recyclerViewAdmin.setHasFixedSize(true);
+                    recyclerViewAdmin.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    adapter.notifyDataSetChanged();
                 }
 
             }

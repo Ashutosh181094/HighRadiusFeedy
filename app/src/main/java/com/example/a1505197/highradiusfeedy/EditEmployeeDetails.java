@@ -25,8 +25,11 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,6 +55,10 @@ public class EditEmployeeDetails extends AppCompatActivity
     String key;
     String useremail;
     DatabaseReference registeredemployees;
+    DatabaseReference feedbackReference;
+    DatabaseReference imageReference;
+    String image_url;
+
 
 
     @Override
@@ -249,17 +256,21 @@ public class EditEmployeeDetails extends AppCompatActivity
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                progressDialog.dismiss();
+
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
                    registeredemployees= FirebaseDatabase.getInstance().getReference("registeredemployees");
                    UserSessiondata userSessiondata=new UserSessiondata();
                    userSessiondata.setImage_url(taskSnapshot.getDownloadUrl().toString());
+                    progressDialog.dismiss();
+                   image_url=taskSnapshot.getDownloadUrl().toString();
 
                 registeredemployees.child(key).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
                 save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        updateimage(image_url);
                         Intent intent=new Intent(EditEmployeeDetails.this,MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -269,7 +280,47 @@ public class EditEmployeeDetails extends AppCompatActivity
             }
         });
     }
+    public void updateimage(final String image_url)
+    {
 
+        final ProgressDialog progressDialog=new ProgressDialog(EditEmployeeDetails.this);
+        progressDialog.setMessage("Please wait while we fetch your data");
+        progressDialog.show();
+        final UserSessiondata userSessiondata=new UserSessiondata();
+        feedbackReference=FirebaseDatabase.getInstance().getReference("feedback").child(userSessiondata.getDepartment());
+        feedbackReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if(dataSnapshot.exists())
+                {
+                    for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                    {
+
+                        Feedbacks feedbacks=dataSnapshot1.getValue(Feedbacks.class);
+
+                        if(feedbacks.getGiven_by().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&feedbacks.getName().equals("änonymous")==false)
+                        {
+                            final UserSessiondata userSessiondata=new UserSessiondata();
+
+                            imageReference=FirebaseDatabase.getInstance().getReference("feedback").child(""+userSessiondata.getDepartment()).child(dataSnapshot1.getKey());
+                            imageReference.child("image_url").setValue((Object)image_url);
+
+                        }
+                    }
+                }
+                progressDialog.dismiss();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 }
 //
