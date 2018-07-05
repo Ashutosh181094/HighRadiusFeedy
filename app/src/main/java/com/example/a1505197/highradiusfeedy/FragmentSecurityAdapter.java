@@ -16,12 +16,12 @@ import java.util.List;
  * Created by 1505197 on 7/5/2018.
  */
 
-public class FragmentFoodAdapter extends RecyclerView.Adapter<FragmentFoodAdapter.VendorViewHolder>
+public class FragmentSecurityAdapter extends RecyclerView.Adapter<FragmentSecurityAdapter.VendorViewHolder>
 {
     Context context;
     LayoutInflater inflater;
     List<FoodObject> data;
-    public FragmentFoodAdapter(Context context, List<FoodObject> data) {
+    public FragmentSecurityAdapter(Context context, List<FoodObject> data) {
         this.context = context;
         this.data = data;
         inflater = LayoutInflater.from(context);
@@ -29,22 +29,20 @@ public class FragmentFoodAdapter extends RecyclerView.Adapter<FragmentFoodAdapte
     }
 
     @Override
-    public FragmentFoodAdapter.VendorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FragmentSecurityAdapter.VendorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.food_security_view_cards, parent, false);
-        FragmentFoodAdapter.VendorViewHolder holder = new FragmentFoodAdapter.VendorViewHolder(view);
+        FragmentSecurityAdapter.VendorViewHolder holder = new FragmentSecurityAdapter.VendorViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(FragmentFoodAdapter.VendorViewHolder holder, int position) {
+    public void onBindViewHolder(FragmentSecurityAdapter.VendorViewHolder holder, int position) {
 
 
         holder.name.setText(data.get(position).name);
-        holder.department.setText("Food");
+        holder.department.setText("Security");
         holder.happysmiley.setText(data.get(position).positive.toString());
         holder.sadsmiley.setText(data.get(position).negative.toString());
-
-
         Picasso.with(context)
                 .load(data.get(position).image_url)
                 .fit()
@@ -79,3 +77,4 @@ public class FragmentFoodAdapter extends RecyclerView.Adapter<FragmentFoodAdapte
         }
     }
 }
+
