@@ -1,0 +1,73 @@
+package com.example.a1505197.highradiusfeedy;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+/**
+ * Created by 1505197 on 7/5/2018.
+ */
+
+public class FoodCardAdapter extends ArrayAdapter<FoodObject>
+{
+    Context context;
+    List<FoodObject> data;
+    private ArrayList<FoodObject> arrayList;
+
+    public FoodCardAdapter(@NonNull Context context, int resource, @NonNull List<FoodObject> objects) {
+        super(context, resource, objects);
+        this.context=context;
+        this.data=objects;
+        arrayList=new ArrayList<>();
+        this.arrayList.addAll(data);
+    }
+    public View getView(final int positions, View convertView, ViewGroup parent)
+    {
+        FoodObject cards=getItem(positions);
+        if(convertView==null)
+        {
+            convertView= LayoutInflater.from(getContext()).inflate(R.layout.give_feedback,parent,false);
+
+        }
+        ImageView employeeImage=convertView.findViewById(R.id.review_card_image);
+        TextView  employeecardname=convertView.findViewById(R.id.review_card_name);
+        TextView employeecarddepartment=convertView.findViewById(R.id.review_card_department);
+        employeecarddepartment.setText("Food");
+        Picasso.with(context)
+                .load(data.get(positions).image_url)
+                .fit()
+                .centerCrop()
+                .into(employeeImage);
+
+
+        return convertView;
+    }
+    public void filter(String characterText)
+    {
+        characterText=characterText.toLowerCase(Locale.getDefault());
+        data.clear();
+        if(characterText.length()==0) {
+            data.addAll(arrayList);
+        }else
+        {
+            data.clear();
+            for(FoodObject foodObject:arrayList)
+            {
+                if(foodObject.getName().toLowerCase(Locale.getDefault()).contains(characterText))
+                    data.add(foodObject);
+            }
+        }
+        notifyDataSetChanged();
+    }
+}

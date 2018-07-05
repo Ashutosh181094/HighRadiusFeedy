@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <com.lorentzos.flingswipe.SwipeFlingAdapterView
+        android:id="@+id/frame"
+        android:background="@color/White"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rotation_degrees="15.5" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/snippetsearchemployeetoolbar"/>
+
+        <include layout="@layout/snippetviewemployeetoolbar"/>
+
+
+
+
+    </FrameLayout>
+
+
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Skip"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/White"
+        android:background="@color/colorPrimary"
+        android:paddingVertical="20dp"/>
+
+
+
+
+</FrameLayout>

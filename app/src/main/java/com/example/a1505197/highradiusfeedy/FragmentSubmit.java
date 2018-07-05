@@ -74,7 +74,7 @@ public class FragmentSubmit extends Fragment
         cardView_food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),Employess.class);
+                Intent intent=new Intent(getContext(),FoodProducts.class);
                 intent.putExtra("tag","Food");
                 startActivity(intent);
             }
@@ -82,7 +82,7 @@ public class FragmentSubmit extends Fragment
         cardView_security.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),Employess.class);
+                Intent intent=new Intent(getContext(),SecurityProducts.class);
                 intent.putExtra("tag","Security");
                 startActivity(intent);
             }
@@ -95,6 +95,7 @@ public class FragmentSubmit extends Fragment
 //                startActivity(intent);
 //            }
 //        });
+
         return view;
     }
 }
