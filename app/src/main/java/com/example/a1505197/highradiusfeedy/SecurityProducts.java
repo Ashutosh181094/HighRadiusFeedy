@@ -256,7 +256,7 @@ public class SecurityProducts extends AppCompatActivity {
 
 
                                 feedback = FirebaseDatabase.getInstance().getReference("feedback").child("Security");
-                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "änonymous","Positive");
+                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "änonymous","Positive",food.getQuestion());
                                 feedback.push().setValue(feedbacks);
 
                                 feedbackpositivecount=FirebaseDatabase.getInstance().getReference("security");
@@ -289,7 +289,7 @@ public class SecurityProducts extends AppCompatActivity {
                                 UserSessiondata userSessiondata1=new UserSessiondata();
                                 FoodObject foodObject = (FoodObject) dataObjectleftswipe;
                                 feedback = FirebaseDatabase.getInstance().getReference("feedback").child("Security");
-                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),userSessiondata1.getImage_url() ,userSessiondata1.getName(),"Positive");
+                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),userSessiondata1.getImage_url() ,userSessiondata1.getName(),"Positive",food.getQuestion());
                                 feedback.push().setValue(feedbacks);
                                 feedbackpositivecount=FirebaseDatabase.getInstance().getReference("security");
                                 feedbackpositivecount.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -385,7 +385,7 @@ public class SecurityProducts extends AppCompatActivity {
                             {
 
                                 feedback = FirebaseDatabase.getInstance().getReference("feedback").child("Security");
-                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "änonymous","Negative");
+                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "änonymous","Negative",foodObject.getQuestion());
                                 feedback.push().setValue(feedbacks);
                                 dialog.dismiss();
                                 feedbackpositivecount=FirebaseDatabase.getInstance().getReference("security");
@@ -409,7 +409,7 @@ public class SecurityProducts extends AppCompatActivity {
                             {
                                 FoodObject foodObject = (FoodObject) dataObject;
                                 feedback = FirebaseDatabase.getInstance().getReference("feedback").child("Security");
-                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),userSessiondata1.getImage_url() ,userSessiondata1.getName(),"Negative");
+                                FeedbackSecurityObject feedbacks = new FeedbackSecurityObject("30-12-2018",feedbacktext.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),userSessiondata1.getImage_url() ,userSessiondata1.getName(),"Negative",foodObject.getQuestion());
                                 feedback.push().setValue(feedbacks);
                                 feedbackpositivecount=FirebaseDatabase.getInstance().getReference("security");
                                 feedbackpositivecount.addListenerForSingleValueEvent(new ValueEventListener() {

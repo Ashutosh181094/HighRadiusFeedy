@@ -39,9 +39,7 @@ public class FeedbackRecievedFragment extends Fragment
     ArrayList<Feedbacks> feedbackRecieved;
     FeedBackRecievedAdapter feedBackRecievedAdapter;
     RecyclerView recyclerView;
-    int indexoffirst;
     int positive=0,negative=0;
-    String key;
     View view2;
     @Nullable
     @Override
@@ -50,9 +48,6 @@ public class FeedbackRecievedFragment extends Fragment
         view2=view;
         recyclerView=view.findViewById(R.id.userSideRecyclerView);
         feedbackRecieved=new ArrayList<>();
-        String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        indexoffirst=email.indexOf('@');
-        key=email.substring(0,indexoffirst);
         UserSessiondata userSessiondata=new UserSessiondata();
         Feedbackrecieved= FirebaseDatabase.getInstance().getReference("feedback").child(""+userSessiondata.getDepartment());
         Feedbackrecieved.addValueEventListener(new ValueEventListener() {
@@ -64,7 +59,7 @@ public class FeedbackRecievedFragment extends Fragment
                     for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                     {
                         Feedbacks feedbacks=dataSnapshot1.getValue(Feedbacks.class);
-                        if(feedbacks.getGiven_to().equals(FirebaseAuth.getInstance().getCurrentUser())) {
+                        if(feedbacks.getGiven_to().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
 
                             String timestamp = getTimeStampDifference(feedbacks.getDate());
 

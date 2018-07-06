@@ -24,6 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
+                android:textColor="@color/Black"
+
                 android:id="@+id/user_name_recieved"
                 android:layout_toRightOf="@+id/profileimagerecieved"
                 android:layout_marginLeft="15dp"
@@ -36,6 +38,8 @@
                 android:layout_below="@+id/user_name_recieved"
                 android:layout_toRightOf="@+id/profileimagerecieved"
                 android:textSize="15dp"
+                android:textColor="@color/Black"
+
                 android:text="12 Apr 2012"
                 android:layout_marginLeft="10dp"
                 />
@@ -53,7 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/view"
             android:text="Description"
-            android:layout_marginTop="20dp"
+                android:textColor="@color/Black"
+                android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>

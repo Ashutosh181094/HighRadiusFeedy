@@ -261,12 +261,17 @@ public class EditEmployeeDetails extends AppCompatActivity
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
                    registeredemployees= FirebaseDatabase.getInstance().getReference("registeredemployees");
-                   UserSessiondata userSessiondata=new UserSessiondata();
-                   userSessiondata.setImage_url(taskSnapshot.getDownloadUrl().toString());
+                registeredemployees.child(key).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
+
+                UserSessiondata userSessiondata=new UserSessiondata();
+                user=FirebaseDatabase.getInstance().getReference("userinfo").child(userSessiondata.getDepartment());
+
+                user.child(""+key).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
+
+                userSessiondata.setImage_url(taskSnapshot.getDownloadUrl().toString());
                     progressDialog.dismiss();
                    image_url=taskSnapshot.getDownloadUrl().toString();
 
-                registeredemployees.child(key).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
                 save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

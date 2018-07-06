@@ -24,6 +24,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Name"
+                    android:textColor="@color/Black"
+
                     android:id="@+id/user_name"
                     android:layout_toRightOf="@+id/profileimage"
                     android:layout_marginLeft="15dp"
@@ -38,6 +40,8 @@
                     android:textSize="15dp"
                     android:text="12 Apr 2012"
                     android:layout_marginLeft="10dp"
+                    android:textColor="@color/Black"
+
                     />
             <View
                 android:layout_width="wrap_content"
@@ -53,10 +57,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view"
                 android:text="Description"
+                android:textColor="@color/Black"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
+                android:layout_marginRight="30dp"
+                />
 
 
 

@@ -34,7 +34,9 @@
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".UploadUserImage" />
         <activity android:name=".FoodProducts" />
-        <activity android:name=".SecurityProducts"></activity>
+        <activity android:name=".SecurityProducts" />
+        <activity android:name=".FoodFeedbackActivity" />
+        <activity android:name=".SecurityFeedbackActivity"></activity>
     </application>
 
 </manifest>

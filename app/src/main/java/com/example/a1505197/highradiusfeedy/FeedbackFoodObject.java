@@ -12,18 +12,10 @@ public class FeedbackFoodObject
     String image_url;
     String name;
     String type;
+    String question;
 
     public FeedbackFoodObject()
     {
-    }
-
-    public FeedbackFoodObject(String date, String feedback, String given_by, String image_url, String name, String type) {
-        this.date = date;
-        this.feedback = feedback;
-        this.given_by = given_by;
-        this.image_url = image_url;
-        this.name = name;
-        this.type = type;
     }
 
     public String getDate() {
@@ -72,5 +64,13 @@ public class FeedbackFoodObject
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }

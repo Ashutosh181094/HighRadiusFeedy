@@ -1,6 +1,7 @@
 package com.example.a1505197.highradiusfeedy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,6 @@ public class FragmentSecurityAdapter extends RecyclerView.Adapter<FragmentSecuri
         TextView name;
         TextView department;
         TextView happysmiley;
-        TextView neutralsmiley;
         TextView sadsmiley;
         ImageView circleImageView;
 
@@ -69,9 +69,18 @@ public class FragmentSecurityAdapter extends RecyclerView.Adapter<FragmentSecuri
             name=itemView.findViewById(R.id.review_card_name);
             department=itemView.findViewById(R.id.review_card_department);
             happysmiley=itemView.findViewById(R.id.positive_count_food);
-            //neutralsmiley=itemView.findViewById(R.id.numberNeutral);
             sadsmiley=itemView.findViewById(R.id.negative_count_food);
             circleImageView=itemView.findViewById(R.id.review_card_image);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    int position=getAdapterPosition();
+
+                    Intent intent=new Intent(context,SecurityFeedbackActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
 
         }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.a1505197.highradiusfeedy.FoodFeedbackActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        app:elevation="0dp"
+        >
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:background="#9CCC65"
+            app:elevation="0dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/koleeg_white"
+                    android:layout_centerHorizontal="true"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/logout_button"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_directions_run_white_24dp"
+                    android:layout_centerVertical="true"
+                    />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="45dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/user_account_ic"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/userSideRecyclerView"
+        />
+
+</LinearLayout>
