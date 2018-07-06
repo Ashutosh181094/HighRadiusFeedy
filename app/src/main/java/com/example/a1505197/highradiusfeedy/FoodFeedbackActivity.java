@@ -34,6 +34,9 @@ public class FoodFeedbackActivity extends AppCompatActivity
         setContentView(R.layout.activity_food_feedback);
         logout=findViewById(R.id.logout_button);
         userInfo=findViewById(R.id.userImage);
+        Intent intent=getIntent();
+        final String question=intent.getStringExtra("question");
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,8 +61,12 @@ public class FoodFeedbackActivity extends AppCompatActivity
                 {
                     for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                     {
+
                         FeedbackFoodObject feedbackfoodObject=dataSnapshot1.getValue(FeedbackFoodObject.class);
-                        al.add(feedbackfoodObject);
+                        if(question.equals(feedbackfoodObject.getQuestion()))
+                        {
+                            al.add(feedbackfoodObject);
+                        }
 
                     }
                 }

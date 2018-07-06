@@ -33,6 +33,8 @@ public class SecurityFeedbackActivity extends AppCompatActivity
         al=new ArrayList<>();
         logout=findViewById(R.id.logout_button);
         userInfo=findViewById(R.id.userImage);
+        Intent intent=getIntent();
+        final String question=intent.getStringExtra("question");
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +59,9 @@ public class SecurityFeedbackActivity extends AppCompatActivity
                     for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                     {
                         FeedbackSecurityObject feedbackSecurityObject=dataSnapshot1.getValue(FeedbackSecurityObject.class);
-                        al.add(feedbackSecurityObject);
+                        if(question.equals(feedbackSecurityObject.getQuestion())) {
+                            al.add(feedbackSecurityObject);
+                        }
 
                     }
                 }

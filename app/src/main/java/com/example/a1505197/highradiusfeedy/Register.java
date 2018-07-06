@@ -258,7 +258,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
 
         Intent intent = new Intent(Register.this, Login.class);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
     @Override

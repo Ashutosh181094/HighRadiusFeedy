@@ -17,9 +17,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/snippetsearchemployeetoolbar"/>
+        <include layout="@layout/snippetsearchsecuritytoolbar"/>
 
-        <include layout="@layout/snippetviewemployeetoolbar"/>
+        <include layout="@layout/snippetviewsecuritytoolbar"/>
 
 
 

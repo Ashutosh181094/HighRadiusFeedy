@@ -78,6 +78,7 @@ public class FragmentSecurityAdapter extends RecyclerView.Adapter<FragmentSecuri
                     int position=getAdapterPosition();
 
                     Intent intent=new Intent(context,SecurityFeedbackActivity.class);
+                    intent.putExtra("question",data.get(position).getQuestion());
                     context.startActivity(intent);
                 }
             });

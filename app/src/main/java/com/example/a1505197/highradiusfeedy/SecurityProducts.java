@@ -32,7 +32,7 @@ import java.util.Locale;
 public class SecurityProducts extends AppCompatActivity {
     private ArrayList<FoodObject> al;
     private  ArrayList<EmployessCards> alpositives;
-    private FoodCardAdapter foodCardAdapter;
+    private SecurityCardAdapter securityCardAdapter;
     private int i;
     DatabaseReference userdata;
     DatabaseReference feedbackpositivecount,feedbacknegative,feedback,userinfo;
@@ -81,7 +81,7 @@ public class SecurityProducts extends AppCompatActivity {
                 String text=searchEmployess.getText().toString().toLowerCase(Locale.getDefault());
                 skiptonext=true;
                 right();
-                foodCardAdapter.filter(text);
+                securityCardAdapter.filter(text);
             }
 
             @Override
@@ -153,9 +153,9 @@ public class SecurityProducts extends AppCompatActivity {
                     }
                 }
 
-                foodCardAdapter = new FoodCardAdapter(SecurityProducts.this, R.layout.give_feedback, al);
-                flingContainer.setAdapter(foodCardAdapter);
-                foodCardAdapter.notifyDataSetChanged();
+                securityCardAdapter= new SecurityCardAdapter(SecurityProducts.this, R.layout.give_security_feedback, al);
+                flingContainer.setAdapter(securityCardAdapter);
+                securityCardAdapter.notifyDataSetChanged();
 
             }
             @Override
@@ -171,7 +171,7 @@ public class SecurityProducts extends AppCompatActivity {
 
                 if(!al.isEmpty()) {
                     al.add(al.remove(0));
-                    foodCardAdapter.notifyDataSetChanged();
+                    securityCardAdapter.notifyDataSetChanged();
                 }
                 else if(al.size()==0)
                 {
@@ -438,7 +438,7 @@ public class SecurityProducts extends AppCompatActivity {
             @Override
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
                 // Ask for more data here
-                foodCardAdapter.notifyDataSetChanged();
+                securityCardAdapter.notifyDataSetChanged();
                 Log.d("LIST", "notified");
                 i++;
             }

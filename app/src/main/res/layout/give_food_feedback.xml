@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/linear_layout_reviewing_designations_name"
+        android:background="#FE4A56">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/White"
+                android:id="@+id/card_desination"
+                 />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/reviewing_card"
+        android:layout_below="@id/linear_layout_reviewing_designations_name"
+        android:layout_height="370dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/review_card_image"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:src="@drawable/food" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/review_card_image"
+                android:paddingHorizontal="20dp"
+                android:id="@+id/relative_layout_for_name_and_designation">
+
+                <TextView
+                    android:id="@+id/review_card_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="22sp"/>
+                <TextView
+                    android:id="@+id/review_card_department"
+                    android:layout_below="@+id/review_card_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Department"
+                    android:textStyle="italic"
+                    android:textSize="18sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/relative_layout_for_name_and_designation"
+
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:paddingHorizontal="10dp">
+
+                <ImageView
+                    android:id="@+id/happy"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginEnd="10dp"
+
+                    android:src="@drawable/happy" />
+
+                <!--<com.like.LikeButton-->
+                <!--android:layout_width="70dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:dots_primary_color="@color/colorAccent"-->
+                <!--app:dots_secondary_color="@color/colorPrimary"-->
+                <!--app:circle_end_color="@color/colorAccent"-->
+
+                <!--app:icon_size="25dp"-->
+                <!--app:is_enabled="true"-->
+                <!--app:unlike_drawable="@drawable/bwsmiley_happy"-->
+                <!--app:like_drawable="@drawable/happy"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:id="@+id/star_button">-->
+
+                <!--</com.like.LikeButton>-->
+
+                <ImageView
+                    android:id="@+id/neutral"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/neutral" />
+
+                <ImageView
+                    android:id="@+id/sad"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/sad" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+        <!---->
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+</RelativeLayout>

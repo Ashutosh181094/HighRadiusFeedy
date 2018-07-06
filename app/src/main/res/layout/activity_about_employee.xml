@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a1505197.highradiusfeedy.AboutEmployeeActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#9CCC65"
+        android:minHeight="?attr/actionBarSize"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relLayout1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userInfoImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/user_account_ic"/>
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NAME"
+                android:layout_below="@+id/userInfoImage"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/ratingChart"
+        android:layout_below="@+id/toolbar">
+
+    </com.github.mikephil.charting.charts.PieChart>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/userSideRecyclerView"
+        android:layout_below="@+id/ratingChart"
+        >
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+</RelativeLayout>

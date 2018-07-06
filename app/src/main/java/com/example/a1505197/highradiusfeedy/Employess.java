@@ -145,7 +145,7 @@ public class Employess extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         EmployessCards userinfo = dataSnapshot1.getValue(EmployessCards.class);
-                        if(levelemp-1>0) {
+                        if(levelemp-1>0&&userinfo.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())==false) {
                             if (userinfo.level == levelemp || userinfo.level == levelemp - 1) {
 
                                 al.add(userinfo);

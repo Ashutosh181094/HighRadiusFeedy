@@ -43,12 +43,12 @@ public class FragmentFood extends Fragment
                  for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                  {
                      FoodObject foodObject=dataSnapshot1.getValue(FoodObject.class);
+
                      al.add(foodObject);
                  }
              }
                 if (getActivity()!=null)
                 {
-
                     fragmentFoodAdapter=new FragmentFoodAdapter(getActivity(),al);
                     recyclerView.setAdapter(fragmentFoodAdapter);
                     recyclerView.setHasFixedSize(true);

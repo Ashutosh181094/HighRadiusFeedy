@@ -80,6 +80,7 @@ public class FragmentFoodAdapter extends RecyclerView.Adapter<FragmentFoodAdapte
                 public void onClick(View v)
                 {
                     Intent intent=new Intent(context,FoodFeedbackActivity.class);
+                    intent.putExtra("question",data.get(getAdapterPosition()).getQuestion());
                     context.startActivity(intent);
                 }
             });

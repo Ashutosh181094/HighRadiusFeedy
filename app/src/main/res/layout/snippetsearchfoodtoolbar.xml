@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/search_toolbar"
+    android:background="@color/White">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="15dp"
+                android:id="@+id/ivBackArrow"
+                android:src="@drawable/ic_action_name"
+                android:layout_marginRight="15dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="SEARH"
+                android:background="@null"
+                android:textColor="@color/Black"
+                android:textSize="20sp"
+                android:id="@+id/etSearchEmployees"
+                android:layout_toRightOf="@+id/ivBackArrow"/>
+            <!-- android:background="@null" This is added to remove the black line under the edit text-->
+
+            <!--Text is defined as sp and everything other is defined as dp-->
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+</android.support.design.widget.AppBarLayout>

@@ -39,6 +39,7 @@
         <activity android:name=".animateButton"/>
         <activity android:name=".FoodFeedbackActivity"/>
         <activity android:name=".SecurityFeedbackActivity"/>
+        <activity android:name=".AboutEmployeeActivity"/>
     </application>
 
 </manifest>

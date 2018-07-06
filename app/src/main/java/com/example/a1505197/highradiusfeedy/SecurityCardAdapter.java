@@ -37,7 +37,7 @@ public class SecurityCardAdapter extends ArrayAdapter<FoodObject>
         FoodObject cards=getItem(positions);
         if(convertView==null)
         {
-            convertView= LayoutInflater.from(getContext()).inflate(R.layout.give_feedback,parent,false);
+            convertView= LayoutInflater.from(getContext()).inflate(R.layout.give_security_feedback,parent,false);
 
         }
         ImageView employeeImage=convertView.findViewById(R.id.review_card_image);

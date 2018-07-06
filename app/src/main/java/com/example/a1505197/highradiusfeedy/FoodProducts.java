@@ -142,7 +142,8 @@ public class FoodProducts extends AppCompatActivity {
                          al.add(foodObject);
 
                     }
-                    if(al.size()==0){
+                    if(al.size()==0)
+                    {
 
                         progressDialog.dismiss();
                         Toast.makeText(FoodProducts.this, "It seems you are the boss ;)", Toast.LENGTH_SHORT).show();
@@ -154,7 +155,7 @@ public class FoodProducts extends AppCompatActivity {
                     }
                 }
 
-                foodCardAdapter = new FoodCardAdapter(FoodProducts.this, R.layout.give_feedback, al);
+                foodCardAdapter = new FoodCardAdapter(FoodProducts.this, R.layout.give_food_feedback, al);
                 flingContainer.setAdapter(foodCardAdapter);
                 foodCardAdapter.notifyDataSetChanged();
 
@@ -248,7 +249,8 @@ public class FoodProducts extends AppCompatActivity {
 
                         }
                     });
-                    buttonsubmitfeedback.setOnClickListener(new View.OnClickListener() {
+                    buttonsubmitfeedback.setOnClickListener(new View.OnClickListener()
+                    {
                         @Override
                         public void onClick(View v)
                         {

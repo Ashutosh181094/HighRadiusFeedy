@@ -1,6 +1,7 @@
 package com.example.a1505197.highradiusfeedy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,6 @@ public class EmployeeInAPerticularDepartmentAdapter extends RecyclerView.Adapter
         TextView name;
         TextView department;
         TextView happysmiley;
-        TextView neutralsmiley;
         TextView sadsmiley;
         CircleImageView circleImageView;
 
@@ -73,9 +73,20 @@ public class EmployeeInAPerticularDepartmentAdapter extends RecyclerView.Adapter
             name=itemView.findViewById(R.id.view_feedback_name_tv);
             department=itemView.findViewById(R.id.view_feedback_department_tv);
             happysmiley=itemView.findViewById(R.id.numberHappy);
-            //neutralsmiley=itemView.findViewById(R.id.numberNeutral);
             sadsmiley=itemView.findViewById(R.id.numberSad);
             circleImageView=itemView.findViewById(R.id.view_feedback_image_view);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context,AboutEmployeeActivity.class);
+                    intent.putExtra("sendDepartment",data.get(getAdapterPosition()).department);
+                    intent.putExtra("sendName",data.get(getAdapterPosition()).name);
+                    intent.putExtra("sendEmail",data.get(getAdapterPosition()).email);
+                    intent.putExtra("designation",data.get(getAdapterPosition()).designation);
+                    intent.putExtra("image",data.get(getAdapterPosition()).getImage_url());
+                    context.startActivity(intent);
+                }
+            });
 
 
         }
