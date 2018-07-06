@@ -63,7 +63,13 @@ public class MainActivity extends AppCompatActivity {
         al = new ArrayList<>();
         email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         indexoffirst=email.indexOf('@');
-        key=email.substring(0,indexoffirst);
+        //
+
+        KeyOfUser keyOfUser=new KeyOfUser();
+
+        key=keyOfUser.getUserKey(email.substring(0,indexoffirst));
+
+        //
         userImage=findViewById(R.id.userImage);
         viewPager=findViewById(R.id.mainActivity_ViewPager);
         pagerTabStrip=findViewById(R.id.title);
