@@ -43,6 +43,7 @@ public class Employess extends AppCompatActivity {
     int indexoffirst,indexofsecond;
     Long levelemp,pos,neg;
     String key,key2;
+    String uniquekey;
     int checked;
     Object dataObjectleftswipe;
     public ProgressDialog progressDialog;
@@ -196,13 +197,15 @@ public class Employess extends AppCompatActivity {
                 final EmployessCards employee = (EmployessCards) dataObject;
                 String email = employee.getEmail();
                 indexoffirst = email.indexOf('@');
+                KeyOfUser keyOfUser=new KeyOfUser();
                 key = email.substring(0, indexoffirst);
+                uniquekey=keyOfUser.getUserKey(key);
                 userinfo=FirebaseDatabase.getInstance().getReference("userinfo").child(""+userSessiondata.getDepartment());
                 userinfo.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot)
                     {
-                        pos=(Long)dataSnapshot.child(""+key).child("positive").getValue();
+                        pos=(Long)dataSnapshot.child(""+uniquekey).child("positive").getValue();
 
 
                     }
@@ -255,7 +258,7 @@ public class Employess extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot)
                                     {
-                                         feedbackpositivecount.child(""+key).child("positive").setValue((Object)(pos+1));
+                                         feedbackpositivecount.child(""+uniquekey).child("positive").setValue((Object)(pos+1));
 
 
                                     }
@@ -287,7 +290,7 @@ public class Employess extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot)
                                         {
-                                            feedbackpositivecount.child(""+key).child("positive").setValue((Object)(pos+1));
+                                            feedbackpositivecount.child(""+uniquekey).child("positive").setValue((Object)(pos+1));
 
 
                                         }
@@ -314,13 +317,15 @@ public class Employess extends AppCompatActivity {
                 final EmployessCards employee = (EmployessCards) dataObject;
                 String email = employee.getEmail();
                 indexoffirst = email.indexOf('@');
+                KeyOfUser keyOfUser=new KeyOfUser();
                 key = email.substring(0, indexoffirst);
+                uniquekey=keyOfUser.getUserKey(key);
                 userinfo=FirebaseDatabase.getInstance().getReference("userinfo").child(""+userSessiondata.getDepartment());
                 userinfo.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot)
                     {
-                        neg=(Long)dataSnapshot.child(""+key).child("negative").getValue();
+                        neg=(Long)dataSnapshot.child(""+uniquekey).child("negative").getValue();
 
 
                     }
@@ -370,7 +375,7 @@ public class Employess extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot)
                                     {
-                                        feedbackpositivecount.child(""+key).child("negative").setValue((Object)(neg+1));
+                                        feedbackpositivecount.child(""+uniquekey).child("negative").setValue((Object)(neg+1));
 
 
                                     }
@@ -393,7 +398,7 @@ public class Employess extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot)
                                         {
-                                            feedbackpositivecount.child(""+key).child("negative").setValue((Object)(neg+1));
+                                            feedbackpositivecount.child(""+uniquekey).child("negative").setValue((Object)(neg+1));
 
 
                                         }

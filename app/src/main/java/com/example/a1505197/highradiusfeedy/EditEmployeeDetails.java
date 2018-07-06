@@ -60,6 +60,7 @@ public class EditEmployeeDetails extends AppCompatActivity
     DatabaseReference feedbackReference;
     DatabaseReference imageReference;
     String image_url;
+    String uniquekey;
 
 
 
@@ -83,6 +84,8 @@ public class EditEmployeeDetails extends AppCompatActivity
         useremail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
         indexoffirst=useremail.indexOf('@');
         key=useremail.substring(0,indexoffirst);
+        KeyOfUser keyOfUser=new KeyOfUser();
+        uniquekey=keyOfUser.getUserKey(key);
         email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         designation.setText(userSessiondata.getDesignation());
 
@@ -157,7 +160,7 @@ public class EditEmployeeDetails extends AppCompatActivity
                         EditText usernameedit=dialog.findViewById(R.id.et_name);
                         String susernameedit=usernameedit.getText().toString();
 
-                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+uniquekey);
 
                         user.child("name").setValue((Object)susernameedit);
                         dialog.dismiss();
@@ -178,7 +181,7 @@ public class EditEmployeeDetails extends AppCompatActivity
                         EditText designation=dialog.findViewById(R.id.et_designation);
                         String sdesignation=designation.getText().toString();
 
-                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+uniquekey);
 
                         user.child("designation").setValue((Object)sdesignation);
                         dialog.dismiss();
@@ -271,7 +274,7 @@ public class EditEmployeeDetails extends AppCompatActivity
                 UserSessiondata userSessiondata=new UserSessiondata();
                 user=FirebaseDatabase.getInstance().getReference("userinfo").child(userSessiondata.getDepartment());
 
-                user.child(""+key).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
+                user.child(""+uniquekey).child("image_url").setValue(taskSnapshot.getDownloadUrl().toString());
 
                 userSessiondata.setImage_url(taskSnapshot.getDownloadUrl().toString());
                     progressDialog.dismiss();
