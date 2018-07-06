@@ -144,6 +144,20 @@ Button login;TextView register;
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null)
+        {
+
+        }
+        else
+        {
+            Intent intent=new Intent(Login.this,MainActivity.class);
+            startActivity(intent);
+        }
+    }
 
     public boolean isStringNull(String string)
     {

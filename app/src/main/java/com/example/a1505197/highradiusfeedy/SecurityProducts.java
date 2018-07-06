@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class SecurityProducts extends AppCompatActivity {
     private ArrayList<FoodObject> al;
@@ -70,26 +67,7 @@ public class SecurityProducts extends AppCompatActivity {
         searchEmployess=findViewById(R.id.etSearchEmployees);
 
 
-        searchEmployess.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String text=searchEmployess.getText().toString().toLowerCase(Locale.getDefault());
-                skiptonext=true;
-                right();
-                securityCardAdapter.filter(text);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-            }
-        });
         skip=findViewById(R.id.skip);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,21 +83,7 @@ public class SecurityProducts extends AppCompatActivity {
 
             }
         });
-        ivSearchicon=findViewById(R.id.ivSearchIcon);
-        ivBackArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                toggleToolbarState();
-            }
-        });
-        ivSearchicon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                toggleToolbarState();
-            }
-        });
+
 
         setAppBarState(STANDARD_APPBAR);
 
@@ -473,13 +437,7 @@ public class SecurityProducts extends AppCompatActivity {
 
         flingContainer.getTopCardListener().selectLeft();
     }
-    private void toggleToolbarState() {
-        if (mAppBarState == STANDARD_APPBAR) {
-            setAppBarState(SEARCH_APPBAR);
-        } else {
-            setAppBarState(STANDARD_APPBAR);
-        }
-    }
+
 
     private void setAppBarState(int state) {
         mAppBarState=state;
@@ -489,12 +447,7 @@ public class SecurityProducts extends AppCompatActivity {
             viewEmployeeBar.setVisibility(View.VISIBLE);
 
         }
-        else if(mAppBarState==SEARCH_APPBAR)
-        {
-            viewEmployeeBar.setVisibility(View.GONE);
-            searchBar.setVisibility(View.VISIBLE);
 
-        }
     }
 
 
