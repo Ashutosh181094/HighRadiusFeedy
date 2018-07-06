@@ -113,6 +113,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                 indexoffirst=email.indexOf('@');
                 if(!isStringNull(email)) {
                     key = email.substring(0, indexoffirst).replaceAll("[-+.^:,]","");
+                    Toast.makeText(Register.this, ""+key, Toast.LENGTH_SHORT).show();
 
                 }
                 else{
@@ -132,6 +133,10 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                     Toast.makeText(Register.this,"Fill in all the fields",Toast.LENGTH_LONG).show();
                     hideProgressBar();
 
+                }
+                if(password.length()<=7){
+                    Toast.makeText(Register.this, "Password must be atleast 7 characters", Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
                 }
 
                 else
@@ -164,7 +169,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                             }
                             else
                             {
-                                Toast.makeText(Register.this,"Error",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Register.this,"Error"+task.getException(),Toast.LENGTH_LONG).show();
 
                                 hideProgressBar();
 

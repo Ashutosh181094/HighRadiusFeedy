@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -94,25 +100,30 @@
         android:inputType="textPassword"
         android:backgroundTint="@color/grey1"
         android:hint="confirmpassword"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        >
- <Button
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:text="REGISTER"
-     android:layout_marginTop="20dp"
-     android:background="#66BB6A"
-     android:textColor="@color/White"
-     android:id="@+id/btn_register"
 
-     />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="REGISTER"
+                android:layout_marginTop="20dp"
+                android:background="#66BB6A"
+                android:textColor="@color/White"
+                android:id="@+id/btn_register"
+
+                />
+
+        </LinearLayout>
+
 
     </LinearLayout>
+
     </RelativeLayout>
 
 
 </LinearLayout>
+</ScrollView>
