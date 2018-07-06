@@ -111,9 +111,15 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                 name=etName.getText().toString();
                 email=etEmail.getText().toString();
                 indexoffirst=email.indexOf('@');
-                key=email.substring(0,indexoffirst);
+                if(!isStringNull(email)) {
+                    key = email.substring(0, indexoffirst).replaceAll("[-+.^:,]","");
 
+                }
+                else{
+                    Toast.makeText(Register.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                }
 
+                //etEmail.setError(" Please enter a valid email");
                // designation.setSelection(0);
                 sendMessage.message=name;
                 password=etPassword.getText().toString();
@@ -127,6 +133,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                     hideProgressBar();
 
                 }
+
                 else
                 if (!isStringEqual(password,confirmpassword))
                 {
@@ -157,7 +164,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                             }
                             else
                             {
-                                Toast.makeText(Register.this,"Email already registered",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Register.this,"Error",Toast.LENGTH_LONG).show();
 
                                 hideProgressBar();
 
@@ -264,7 +271,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         designation=parent.getItemAtPosition(position).toString();
-        dispay(designation);
+       // dispay(designation);
 
 
 

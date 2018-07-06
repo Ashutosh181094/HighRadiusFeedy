@@ -204,13 +204,13 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btn_view_my_reviews"
+        android:id="@+id/btn_analytics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_layout_encapsulating_cards"
         android:layout_margin="30dp"
         android:background="#279F43"
-        android:text="View my reviews"
+        android:text="ANALYTICS"
         android:textColor="@color/White"
         android:paddingVertical="20dp"/>
 

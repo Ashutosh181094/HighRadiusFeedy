@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * Created by 1505197 on 6/29/2018.
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 
 public class FragmentSubmit extends Fragment
 {
+    Button analyticsButton;
     CardView cardView_manager,cardView_hr,cardView_admin,cardView_food,cardView_security,cardView_etc;
     @Nullable
     @Override
@@ -24,6 +26,7 @@ public class FragmentSubmit extends Fragment
         cardView_manager=view.findViewById(R.id.card_manager);
         cardView_admin=view.findViewById(R.id.card_admin);
         cardView_hr=view.findViewById(R.id.card_hr);
+        analyticsButton=view.findViewById(R.id.btn_analytics);
        // cardView_etc=view.findViewById(R.id.card_etc);
         UserSessiondata userSessiondata=new UserSessiondata();
         String department=userSessiondata.getDepartment();
@@ -84,6 +87,13 @@ public class FragmentSubmit extends Fragment
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),SecurityProducts.class);
                 intent.putExtra("tag","Security");
+                startActivity(intent);
+            }
+        });
+        analyticsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),EmployeeInfo.class);
                 startActivity(intent);
             }
         });
