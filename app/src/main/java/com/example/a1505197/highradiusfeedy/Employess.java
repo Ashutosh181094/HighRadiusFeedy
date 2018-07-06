@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.like.LikeButton;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class Employess extends AppCompatActivity {
     Button skip;
     Boolean skiptonext=false;
     EditText searchEmployess;
-
+    LikeButton happysmiley;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class Employess extends AppCompatActivity {
         flingContainer = findViewById(R.id.frame);
         viewEmployeeBar=findViewById(R.id.viewEmployeeToolbar);
         searchBar=findViewById(R.id.search_toolbar);
+        /* happysmiley=findViewById(R.id.happy); */
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = user.getEmail();

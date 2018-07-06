@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
 
@@ -96,7 +98,25 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
                     android:layout_marginEnd="10dp"
+
                     android:src="@drawable/happy" />
+
+                <!--<com.like.LikeButton-->
+                    <!--android:layout_width="70dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:dots_primary_color="@color/colorAccent"-->
+                    <!--app:dots_secondary_color="@color/colorPrimary"-->
+                    <!--app:circle_end_color="@color/colorAccent"-->
+
+                    <!--app:icon_size="25dp"-->
+                    <!--app:is_enabled="true"-->
+                    <!--app:unlike_drawable="@drawable/bwsmiley_happy"-->
+                    <!--app:like_drawable="@drawable/happy"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:id="@+id/star_button">-->
+
+                <!--</com.like.LikeButton>-->
 
                 <ImageView
                     android:id="@+id/neutral"

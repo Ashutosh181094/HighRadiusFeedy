@@ -1,9 +1,11 @@
 package com.example.a1505197.highradiusfeedy;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,10 +14,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager=null;
     int indexoffirst;
     FirebaseUser user;
+    public PagerTabStrip pagerTabStrip;
  FirebaseAuth mAuth;
-
+    Context context;
+    ProgressDialog progressDialog;
     DatabaseReference userdata;
     private ArrayList<RegisteredEmployeesData> al;
 
@@ -59,22 +66,60 @@ public class MainActivity extends AppCompatActivity {
         key=email.substring(0,indexoffirst);
         userImage=findViewById(R.id.userImage);
         viewPager=findViewById(R.id.mainActivity_ViewPager);
-
+        pagerTabStrip=findViewById(R.id.title);
 
 //
+
+        pagerTabStrip.setTextColor(getResources().getColor(R.color.White));
+        pagerTabStrip.setDrawFullUnderline(true);
+        pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.grey1));
         final ProgressDialog progressDialog=new ProgressDialog(MainActivity.this);
+        progressDialog.getOwnerActivity();
         progressDialog.setMessage("Please wait while we fetch your data");
         progressDialog.show();
 //
+
+
 
         logoutImage=findViewById(R.id.logout_button);
         logoutImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent=new Intent(MainActivity.this,Login.class);
-                startActivity(intent);
-                finish();
+
+                calldialog();
+
+
+                //finish();
+
+            }
+
+            private void calldialog() {
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setCancelable(false);
+                builder.setMessage("Do you want to Logout?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent=new Intent(MainActivity.this,Login.class);
+                        startActivity(intent);
+                        //if user pressed "yes", then he is allowed to exit from application
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //if user select "No", just cancel this dialog and continue with app
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
 
             }
         });
@@ -115,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         .centerCrop()
                         .into(userImage);
               progressDialog.dismiss();
+
 
               viewPager.setAdapter(new Mypager(getSupportFragmentManager()));
 
@@ -186,11 +232,56 @@ public class MainActivity extends AppCompatActivity {
         else
         {
 
+            //////////////////////////////////////
+
+
+            Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                    .getBoolean("isFirstRun", true);
+           // Toast.makeText(this, ""+isFirstRun.toString(), Toast.LENGTH_SHORT).show();
+
+            if (isFirstRun) {
+                //show start activity
+
+                Intent intent = new Intent(MainActivity.this,OnBoarding.class);
+
+                startActivity(intent);
+                //finish();
+
+                //startActivity(new Intent(this, OnBoarding.class));
+                Toast.makeText(getApplicationContext(), "First Run", Toast.LENGTH_LONG)
+                        .show();
+                //finish();
+            }
+            else {
+               // startActivity(new Intent(this, Login.class));
+               // finish();
+
+            }
+
+
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun", false).commit();
+
+
+
+
+
+
+
+            /////////////////////////////////////////
         }
+    }
+    protected void onDestroy () {
+        super.onDestroy();
+        if (progressDialog != null)
+            if (progressDialog.isShowing())
+                progressDialog.dismiss();
+        progressDialog = null;
     }
 }
 class Mypager extends FragmentPagerAdapter
 {
+
     UserSessiondata userSessiondata;
     String department;
     private static final String TAG = "Mypager";
@@ -199,19 +290,28 @@ class Mypager extends FragmentPagerAdapter
         super(fm);
     }
 
+
+
+
     @Override
     public Fragment getItem(int position) {
+
        Fragment fragment=null;
         userSessiondata=new UserSessiondata();
        department=userSessiondata.getDepartment();
        if(position==0)
+
        {
            fragment=new FragmentSubmit();
        }
        else
                if(position==1)
                {
+
+
                 fragment=new FragmentFood();
+
+
                }
                else
                    if(position==2)
@@ -221,6 +321,7 @@ class Mypager extends FragmentPagerAdapter
                    else
         if(position==3)
         {
+
             if(department.equals("Finance"))
             {
                 fragment=new FragmentFinance();
@@ -241,6 +342,7 @@ class Mypager extends FragmentPagerAdapter
                            return fragment;
     }
 
+
     @Override
     public int getCount() {
         return 4;
@@ -253,6 +355,7 @@ class Mypager extends FragmentPagerAdapter
         userSessiondata=new UserSessiondata();
         department=userSessiondata.getDepartment();
         if(position==0)
+
             return "SUBMIT";
 
             else

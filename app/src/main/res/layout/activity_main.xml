@@ -58,8 +58,9 @@
 
         android:id="@+id/mainActivity_ViewPager">
         <android.support.v4.view.PagerTabStrip
+
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="90dp"
             android:id="@+id/title"
             android:background="#9CCC65"
             app:tabSelectedTextColor="@color/White"

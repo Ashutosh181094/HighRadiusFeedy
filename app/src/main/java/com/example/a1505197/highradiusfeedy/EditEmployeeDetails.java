@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.like.LikeButton;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -42,6 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditEmployeeDetails extends AppCompatActivity
 {
     ImageView back;
+    LikeButton happysmiley,sadsmiley;
     ImageView save;
     ImageView camera;
     ImageView iv_user;
@@ -61,18 +63,21 @@ public class EditEmployeeDetails extends AppCompatActivity
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_employee_details);
         back=findViewById(R.id.backArrow);
         save=findViewById(R.id.saveChanges);
+
         camera=findViewById(R.id.iv_camera);
         name=findViewById(R.id.username);
         iv_user=findViewById(R.id.iv_user);
         iv_designation=findViewById(R.id.iv_designation);
         designation=findViewById(R.id.designation);
         email=findViewById(R.id.email);
+
         UserSessiondata userSessiondata=new UserSessiondata();
         name.setText(userSessiondata.getName());
         useremail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
