@@ -59,6 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/username"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:inputType="none"
@@ -96,8 +98,9 @@
                     android:id="@+id/designation"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
+                    android:focusable="false"
                     android:inputType="none"
-
+                    android:clickable="false"
 
                     android:hint="Designation"
                     android:layout_marginLeft="40dp" />
@@ -137,6 +140,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:background="@null"
+
                     android:hint="Email"
                     android:inputType="none"
                     android:focusable="false"

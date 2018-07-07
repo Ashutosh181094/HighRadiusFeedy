@@ -18,13 +18,7 @@
                 android:text="Security"
                 android:textColor="@color/White"
                 android:textSize="20sp"/>
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:id="@+id/ivSearchIcon"
-                android:src="@drawable/ic_search"/>
+
             <!--Text is defined as sp and everything other is defined as dp-->
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

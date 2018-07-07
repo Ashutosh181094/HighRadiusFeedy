@@ -144,48 +144,49 @@ public class EditEmployeeDetails extends AppCompatActivity
                 builder.show();
             }
         });
-        iv_user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog=new Dialog(EditEmployeeDetails.this);
-                dialog.setContentView(R.layout.edit_name);
-                dialog.show();
-                Button upload=dialog.findViewById(R.id.btn_edit_name);
-                upload.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        EditText usernameedit=dialog.findViewById(R.id.et_name);
-                        String susernameedit=usernameedit.getText().toString();
 
-                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
-
-                        user.child("name").setValue((Object)susernameedit);
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
-        iv_designation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog=new Dialog(EditEmployeeDetails.this);
-                dialog.setContentView(R.layout.edit_designation);
-                dialog.show();
-                Button upload=dialog.findViewById(R.id.btn_edit_designation);
-                upload.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        EditText designation=dialog.findViewById(R.id.et_designation);
-                        String sdesignation=designation.getText().toString();
-
-                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
-
-                        user.child("designation").setValue((Object)sdesignation);
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
+//        iv_user.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Dialog dialog=new Dialog(EditEmployeeDetails.this);
+//                dialog.setContentView(R.layout.edit_name);
+//                dialog.show();
+//                Button upload=dialog.findViewById(R.id.btn_edit_name);
+//                upload.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        EditText usernameedit=dialog.findViewById(R.id.et_name);
+//                        String susernameedit=usernameedit.getText().toString();
+//
+//                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+//
+//                        user.child("name").setValue((Object)susernameedit);
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//        });
+//        iv_designation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Dialog dialog=new Dialog(EditEmployeeDetails.this);
+//                dialog.setContentView(R.layout.edit_designation);
+//                dialog.show();
+//                Button upload=dialog.findViewById(R.id.btn_edit_designation);
+//                upload.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        EditText designation=dialog.findViewById(R.id.et_designation);
+//                        String sdesignation=designation.getText().toString();
+//
+//                        user= FirebaseDatabase.getInstance().getReference("userinfo").child(""+key);
+//
+//                        user.child("designation").setValue((Object)sdesignation);
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//        });
 
     }
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)

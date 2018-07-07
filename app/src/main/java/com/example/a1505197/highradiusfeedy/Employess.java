@@ -2,7 +2,10 @@ package com.example.a1505197.highradiusfeedy;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -137,43 +140,50 @@ public class Employess extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        al = new ArrayList<>();
-        userdata = FirebaseDatabase.getInstance().getReference("userinfo").child(""+key3);
-        userdata.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        EmployessCards userinfo = dataSnapshot1.getValue(EmployessCards.class);
-                        if(levelemp-1>0&&userinfo.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())==false) {
-                            if (userinfo.level == levelemp || userinfo.level == levelemp - 1) {
 
-                                al.add(userinfo);
+        al = new ArrayList<>();
+        if(isWorkingInternetPersent()) {
+            userdata = FirebaseDatabase.getInstance().getReference("userinfo").child("" + key3);
+            userdata.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            EmployessCards userinfo = dataSnapshot1.getValue(EmployessCards.class);
+                            if (levelemp - 1 > 0 && userinfo.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()) == false) {
+                                if (userinfo.level == levelemp || userinfo.level == levelemp - 1) {
+
+                                    al.add(userinfo);
+                                }
                             }
                         }
-                    }
-                    if(al.size()==0){
+                        if (al.size() == 0) {
 
-                    progressDialog.dismiss();
-                        Toast.makeText(Employess.this, "It seems you are the boss ;)", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            Toast.makeText(Employess.this, "It seems you are the boss ;)", Toast.LENGTH_SHORT).show();
 
 
+                        } else {
+                            progressDialog.dismiss();
+                        }
                     }
-                    else {
-                        progressDialog.dismiss();
-                    }
+
+                    arrayAdapter = new EmployessCardAdapter(Employess.this, R.layout.give_feedback, al);
+                    flingContainer.setAdapter(arrayAdapter);
+                    arrayAdapter.notifyDataSetChanged();
+
                 }
 
-                arrayAdapter = new EmployessCardAdapter(Employess.this, R.layout.give_feedback, al);
-                flingContainer.setAdapter(arrayAdapter);
-                arrayAdapter.notifyDataSetChanged();
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(this, "Not Connected To network", Toast.LENGTH_SHORT).show();
+        }
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
@@ -202,7 +212,14 @@ public class Employess extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot)
                     {
-                        pos=(Long)dataSnapshot.child(""+key).child("positive").getValue();
+                        if (isWorkingInternetPersent())
+                        {
+                            pos = (Long) dataSnapshot.child("" + key).child("positive").getValue();
+                        }
+                        else
+                        {
+                            Toast.makeText(Employess.this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
+                        }
 
 
                     }
@@ -242,20 +259,30 @@ public class Employess extends AppCompatActivity {
                         {
                             if (checked == 1)
                             {
-                                Toast.makeText(Employess.this, ""+pos, Toast.LENGTH_SHORT).show();
 
 
-
-                                feedback = FirebaseDatabase.getInstance().getReference("feedback").child(employee.getDepartment());
-                                Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), "änonymous", "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "30/6/2018", "Positive",employee.getEmail(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),employee.getLevel());
-                                feedback.push().setValue(feedbacks);
+                               if(isWorkingInternetPersent())
+                               {
+                                   feedback = FirebaseDatabase.getInstance().getReference("feedback").child(employee.getDepartment());
+                                   Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), "änonymous", "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "30/6/2018", "Positive", employee.getEmail(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), employee.getLevel());
+                                   feedback.push().setValue(feedbacks);
+                                   Toast.makeText(Employess.this, "Feedback Submitted", Toast.LENGTH_SHORT).show();
+                               }
 
                                 feedbackpositivecount=FirebaseDatabase.getInstance().getReference("userinfo").child(""+userSessiondata.getDepartment());
                                 feedbackpositivecount.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot)
                                     {
-                                         feedbackpositivecount.child(""+key).child("positive").setValue((Object)(pos+1));
+                                        if (isWorkingInternetPersent())
+                                        {
+                                            feedbackpositivecount.child(""+key).child("positive").setValue((Object)(pos+1));
+
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(Employess.this, "Not Connected to network", Toast.LENGTH_SHORT).show();
+                                        }
 
 
                                     }
@@ -279,15 +306,27 @@ public class Employess extends AppCompatActivity {
 
 
                                     EmployessCards employee = (EmployessCards) dataObjectleftswipe;
-                                    feedback = FirebaseDatabase.getInstance().getReference("feedback").child(employee.getDepartment());
-                                    Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), employee.getName(), employee.getImage_url(), "30/6/2018", "Positive",employee.getEmail(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),employee.getLevel());
-                                    feedback.push().setValue(feedbacks);
+                                    if(isWorkingInternetPersent()) {
+                                        feedback = FirebaseDatabase.getInstance().getReference("feedback").child(employee.getDepartment());
+                                        Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), employee.getName(), employee.getImage_url(), "30/6/2018", "Positive", employee.getEmail(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), employee.getLevel());
+                                        feedback.push().setValue(feedbacks);
+                                        Toast.makeText(Employess.this, "Feedback Submitted", Toast.LENGTH_SHORT).show();
+
+                                    }
                                     feedbackpositivecount=FirebaseDatabase.getInstance().getReference("userinfo").child(""+userSessiondata.getDepartment());
                                     feedbackpositivecount.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot)
                                         {
-                                            feedbackpositivecount.child(""+key).child("positive").setValue((Object)(pos+1));
+                                            if(isWorkingInternetPersent())
+                                            {
+                                                feedbackpositivecount.child(""+key).child("positive").setValue((Object)(pos+1));
+
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(Employess.this, "Not Connected to internet", Toast.LENGTH_SHORT).show();
+                                            }
 
 
                                         }
@@ -320,7 +359,13 @@ public class Employess extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot)
                     {
-                        neg=(Long)dataSnapshot.child(""+key).child("negative").getValue();
+                        if(isWorkingInternetPersent()) {
+                            neg = (Long) dataSnapshot.child("" + key).child("negative").getValue();
+                        }
+                        else
+                        {
+                            Toast.makeText(Employess.this, "Not Connected to Network", Toast.LENGTH_SHORT).show();
+                        }
 
 
                     }
@@ -357,20 +402,35 @@ public class Employess extends AppCompatActivity {
                         @Override
                         public void onClick(View v)
                         {
+
                             if (checked == 1)
                             {
-
                                 EmployessCards employee = (EmployessCards) dataObject;
-                                feedback = FirebaseDatabase.getInstance().getReference("feedback").child("" + employee.getDepartment());
-                                Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), "änonymous", "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "30/6/2018", "Negative",employee.getEmail(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),employee.getLevel());
-                                feedback.push().setValue(feedbacks);
-                                dialog.dismiss();
+                                if(isWorkingInternetPersent()) {
+                                    feedback = FirebaseDatabase.getInstance().getReference("feedback").child("" + employee.getDepartment());
+                                    Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), "änonymous", "https://firebasestorage.googleapis.com/v0/b/highradiusfeedy.appspot.com/o/icons8-male-user-100.png?alt=media&token=bda9da85-87b9-4933-90f8-250c7e67baa8", "30/6/2018", "Negative", employee.getEmail(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), employee.getLevel());
+                                    feedback.push().setValue(feedbacks);
+                                    Toast.makeText(Employess.this, "Feedback Submitted", Toast.LENGTH_SHORT).show();
+
+                                }
+                                {
+                                    dialog.dismiss();
+
+                                }
                                 feedbackpositivecount=FirebaseDatabase.getInstance().getReference("userinfo").child(""+userSessiondata.getDepartment());
                                 feedbackpositivecount.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot)
                                     {
-                                        feedbackpositivecount.child(""+key).child("negative").setValue((Object)(neg+1));
+                                        if(isWorkingInternetPersent())
+                                        {
+                                            feedbackpositivecount.child(""+key).child("negative").setValue((Object)(neg+1));
+
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(Employess.this, "Not Connected to Internet", Toast.LENGTH_SHORT).show();
+                                        }
 
 
                                     }
@@ -385,15 +445,27 @@ public class Employess extends AppCompatActivity {
                             else
                                 {
                                 EmployessCards employee = (EmployessCards) dataObject;
-                                feedback = FirebaseDatabase.getInstance().getReference("feedback").child("" + employee.getDepartment());
-                                Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), employee.getName(), employee.getImage_url(), "30/6/2018", "Negative",employee.getEmail(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),employee.getLevel());
+                                if(isWorkingInternetPersent()) {
+                                    feedback = FirebaseDatabase.getInstance().getReference("feedback").child("" + employee.getDepartment());
+                                    Feedbacks feedbacks = new Feedbacks(feedbacktext.getText().toString(), employee.getName(), employee.getImage_url(), "30/6/2018", "Negative", employee.getEmail(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), employee.getLevel());
                                     feedback.push().setValue(feedbacks);
+                                    Toast.makeText(Employess.this, "Feedback Submitted", Toast.LENGTH_SHORT).show();
+
+                                }
                                     feedbackpositivecount=FirebaseDatabase.getInstance().getReference("userinfo").child(""+userSessiondata.getDepartment());
                                     feedbackpositivecount.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot)
                                         {
-                                            feedbackpositivecount.child(""+key).child("negative").setValue((Object)(neg+1));
+                                            if(isWorkingInternetPersent())
+                                            {
+                                                feedbackpositivecount.child(""+key).child("negative").setValue((Object)(neg+1));
+
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(Employess.this, "Not Connected to internet", Toast.LENGTH_SHORT).show();
+                                            }
 
 
                                         }
@@ -406,6 +478,7 @@ public class Employess extends AppCompatActivity {
 
                                     dialog.dismiss();
                             }
+
                         }
                     });
                 }
@@ -434,6 +507,7 @@ public class Employess extends AppCompatActivity {
         });
 
     }
+
 
 
 
@@ -479,6 +553,20 @@ public class Employess extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         setAppBarState(STANDARD_APPBAR);
+    }
+    public boolean isWorkingInternetPersent() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+
+        }
+        return false;
     }
 
 

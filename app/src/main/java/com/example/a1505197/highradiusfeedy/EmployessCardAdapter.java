@@ -30,6 +30,9 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
     List<EmployessCards> data;
     LikeButton lbhappysmiley;
     private ArrayList<EmployessCards> arrayList;
+    Employess employessreference;
+
+
 
     public EmployessCardAdapter(@NonNull Context context, int resource, @NonNull List<EmployessCards> objects) {
         super(context, resource, objects);
@@ -52,6 +55,7 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
         TextView employeecarddepartment=convertView.findViewById(R.id.review_card_department);
         //lbhappysmiley=convertView.findViewById(R.id.happy);
        // lbhappysmiley.setUnlikeDrawable(Drawable.createFromPath(String.valueOf(R.drawable.bwsmiley_happy)));
+
 
         employeecarddepartment.setText(cards.getDepartment());
         employeedesignation.setText(cards.getDesignation());
@@ -82,6 +86,7 @@ public class EmployessCardAdapter extends ArrayAdapter<EmployessCards>
         }
         notifyDataSetChanged();
     }
+
 
 
 }

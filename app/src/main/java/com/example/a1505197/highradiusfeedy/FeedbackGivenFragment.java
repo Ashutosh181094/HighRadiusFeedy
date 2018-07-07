@@ -90,22 +90,7 @@ public class FeedbackGivenFragment extends Fragment
                  recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                  feedBackGivenAdapter.notifyDataSetChanged();
                   }
-                List<PieEntry> p=new ArrayList<>();
-                TellFeedbackCount tellFeedbackCount=new TellFeedbackCount();
-                positive=tellFeedbackCount.getPositive();
-                negative=tellFeedbackCount.getNegative();
-                p.add(new PieEntry(positive,"Positive"));
-                p.add(new PieEntry(negative,"Negative"));
 
-
-                PieDataSet pieDataSet=new PieDataSet(p,"Feedback");
-                pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-                PieData pieData=new PieData(pieDataSet);
-                PieChart chart=view2.findViewById(R.id.ratingChart);
-                chart.setCenterText("Feedback");
-                chart.setData(pieData);
-                chart.animateY(1000);
-                chart.invalidate();
             }
 
             @Override
