@@ -1,21 +1,16 @@
 package com.example.a1505197.highradiusfeedy;
 
 import android.app.AlertDialog;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -202,30 +197,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void sendNotification()
-    {
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this);
-
-        //Create the intent that’ll fire when the user taps the notification//
-
-        Intent intent = new Intent(MainActivity.this,EmployeeInfo.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-        mBuilder.setContentIntent(pendingIntent);
-
-        mBuilder.setSmallIcon(R.drawable.koleeg_green);
-        mBuilder.setContentTitle("New Feedback");
-        mBuilder.setContentText("A new Feedback given to you");
-        mBuilder.setColor(Color.GREEN);
-
-        NotificationManager mNotificationManager =
-
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        mNotificationManager.notify(001, mBuilder.build());
-    }
 
     @Override
     protected void onStart() {

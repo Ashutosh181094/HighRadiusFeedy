@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by 1505197 on 7/5/2018.
@@ -53,21 +52,5 @@ public class FoodCardAdapter extends ArrayAdapter<FoodObject>
 
         return convertView;
     }
-    public void filter(String characterText)
-    {
-        characterText=characterText.toLowerCase(Locale.getDefault());
-        data.clear();
-        if(characterText.length()==0) {
-            data.addAll(arrayList);
-        }else
-        {
-            data.clear();
-            for(FoodObject foodObject:arrayList)
-            {
-                if(foodObject.getName().toLowerCase(Locale.getDefault()).contains(characterText))
-                    data.add(foodObject);
-            }
-        }
-        notifyDataSetChanged();
-    }
+
 }

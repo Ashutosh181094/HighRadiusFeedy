@@ -160,8 +160,8 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                                 registerUser();
                                 hideProgressBar();
                                 sendVerificationEmail();
-                                FirebaseAuth.getInstance().signOut();
                                 redirectLoginScreen();
+                                FirebaseAuth.getInstance().signOut();
                                 Toast.makeText(Register.this,"Verification link has been sent to registered Email",Toast.LENGTH_LONG).show();
                                 hideProgressBar();
 
